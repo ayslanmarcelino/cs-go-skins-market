@@ -84,3 +84,5 @@ pt-BR:
         enterprise: Empresa
         created_at: Criado em
         updated_at: Atualizado em
+      steam/account:
+        steam_custom_id: ID personalizado
