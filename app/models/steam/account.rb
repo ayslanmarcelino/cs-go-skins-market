@@ -13,26 +13,26 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  enterprise_id     :bigint
+#  owner_id          :bigint
 #  steam_custom_id   :string
 #  steam_id          :string
-#  user_id           :bigint
 #
 # Indexes
 #
 #  index_steam_accounts_on_enterprise_id  (enterprise_id)
-#  index_steam_accounts_on_user_id        (user_id)
+#  index_steam_accounts_on_owner_id       (owner_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
-#  fk_rails_...  (user_id => users.id)
+#  fk_rails_...  (owner_id => users.id)
 #
 class Steam::Account < ApplicationRecord
-  belongs_to :user
+  belongs_to :owner, class_name: 'User'
   belongs_to :enterprise
 
   validates :steam_custom_id, presence: true
-  validates :steam_custom_id, uniqueness: { scope: [:user_id, :enterprise_id] }
+  validates :steam_custom_id, uniqueness: { scope: [:owner_id, :enterprise_id] }
 
   def self.permitted_params
     [
@@ -40,7 +40,7 @@ class Steam::Account < ApplicationRecord
       :active,
       :steam_custom_id,
       :enterprise_id,
-      :user_id
+      :owner_id
     ]
   end
 end

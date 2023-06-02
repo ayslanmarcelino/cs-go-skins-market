@@ -11,7 +11,7 @@ class CreateSteamAccounts < ActiveRecord::Migration[7.0]
       t.string :real_name
       t.boolean :active, default: true
 
-      t.references :user, foreign_key: true
+      t.references :owner, foreign_key: { to_table: :users }
       t.references :enterprise, foreign_key: true
 
       t.timestamps

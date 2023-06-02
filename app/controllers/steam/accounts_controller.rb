@@ -35,7 +35,7 @@ module Steam
     def account_params
       params.require(:steam_account)
             .permit(Steam::Account.permitted_params)
-            .merge(user: current_user, enterprise: current_user.current_enterprise)
+            .merge(owner: current_user, enterprise: current_user.current_enterprise)
     end
 
     def update_steam_account!
