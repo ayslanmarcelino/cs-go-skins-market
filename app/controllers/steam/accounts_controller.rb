@@ -15,8 +15,9 @@ module Steam
     def create
       @steam_account = Steam::Account.new(account_params)
 
-      if @steam_account.valid?
-        @steam_account.save
+      if @steam_account.save
+        Steam::Accounts::Players::Update.call(steam_account: @steam_account) if @steam_account.persisted?
+
         redirect_success(path: steam_accounts_path, action: 'criada')
       else
         render(:new, status: :unprocessable_entity)
