@@ -15,10 +15,16 @@ module Steam
     def create
       @steam_account = Steam::Account.new(account_params)
 
-      if @steam_account.save
-        Steam::Accounts::Players::Update.call(steam_account: @steam_account) if @steam_account.persisted?
+      if @steam_account.valid?
+        ActiveRecord::Base.transaction do
+          update_steam_account!
 
-        redirect_success(path: steam_accounts_path, action: 'criada')
+          @steam_account.save if @updated_steam_account
+          flash[:danger] = 'Conta não existe. Favor preencher com a URL personalizada do seu perfil.' if @updated_steam_account.nil?
+        end
+
+        redirect_to(steam_accounts_path)
+        flash[:success] = 'Conta Steam criada com sucesso.'
       else
         render(:new, status: :unprocessable_entity)
       end
@@ -32,9 +38,8 @@ module Steam
             .merge(user: current_user, enterprise: current_user.current_enterprise)
     end
 
-    def redirect_success(path:, action:)
-      redirect_to(path)
-      flash[:success] = "Conta Steam #{action} com sucesso."
+    def update_steam_account!
+      @updated_steam_account = Steam::Accounts::Players::Update.call(steam_account: @steam_account)
     end
   end
 end
