@@ -16,10 +16,6 @@ Rails.application.routes.draw do
     end
   end
 
-  namespace :steam do
-    resources :accounts, only: [:index, :new, :create]
-  end
-
   namespace :admin do
     resources :users, only: [:index, :show, :new, :create, :edit, :update] do
       member do
@@ -35,4 +31,8 @@ Rails.application.routes.draw do
   end
 
   resources :clients, only: [:index, :new, :create]
+
+  namespace :steam do
+    resources :accounts, only: [:index, :new, :create, :destroy]
+  end
 end
