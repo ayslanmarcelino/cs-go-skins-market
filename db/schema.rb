@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_04_003506) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,24 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_003506) do
     t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
   end
 
+  create_table "steam_accounts", force: :cascade do |t|
+    t.string "steam_id"
+    t.string "steam_custom_id"
+    t.string "profile_url"
+    t.string "nickname"
+    t.string "avatar_url"
+    t.string "avatar_medium_url"
+    t.string "avatar_full_url"
+    t.string "real_name"
+    t.boolean "active", default: true
+    t.bigint "owner_id"
+    t.bigint "enterprise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_steam_accounts_on_enterprise_id"
+    t.index ["owner_id"], name: "index_steam_accounts_on_owner_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "enterprise_id"
@@ -133,6 +151,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_04_003506) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
+  add_foreign_key "steam_accounts", "enterprises"
+  add_foreign_key "steam_accounts", "users", column: "owner_id"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
   add_foreign_key "user_roles", "users", column: "created_by_id"

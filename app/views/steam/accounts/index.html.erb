@@ -1,0 +1,82 @@
+<div class="row col-md-12">
+  <h4><%= t('steam.accounts.components.layout.resource') %></h4>
+  <div>
+    <div class="pull-right mb-2">
+      <% if can?(:create, Steam::Account) %>
+        <%= link_to(new_steam_account_path, class: 'btn btn-sm btn-success') do %>
+          <i class="bi bi-plus-circle"></i>
+          <%= t('application.new') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= sort_link(@query, :steam_id, t('.steam_id')) %></th>
+          <th><%= sort_link(@query, :steam_custom_id, t('.steam_custom_id')) %></th>
+          <th><%= t('.profile_url') %></th>
+          <th><%= sort_link(@query, :nickname, t('.nickname')) %></th>
+          <th><%= t('.avatar') %></th>
+          <th><%= sort_link(@query, :real_name, t('.real_name')) %></th>
+          <th><%= t('.status') %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @steam_accounts.each do |account| %>
+          <tr>
+            <td><%= account.steam_id %></td>
+            <td><%= account.steam_custom_id %></td>
+            <td><%= link_to(account.profile_url, account.profile_url, target: :_blank) %></td>
+            <td><%= account.nickname %></td>
+            <td><%= image_tag(account.avatar_url) if account.avatar_url.present? %></td>
+            <td><%= account.real_name %></td>
+            <td class="status">
+              <span class="<%= active?(account.active) %>"></span>
+            </td>
+            <td>
+              <% if can?(:update, Steam::Account) %>
+                <%= link_to(steam_account_path(account),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('steam.accounts.components.layout.update')}: #{account.steam_id}?"
+                            },
+                            class: 'btn btn-sm') do %>
+                  <i class="bi bi-arrow-repeat"></i>
+                <% end %>
+              <% end %>
+              <% if account.active? && can?(:disable, Steam::Account) %>
+                  <%= link_to(disable_steam_account_path(account),
+                              data: {
+                                turbo_method: :patch,
+                                turbo_confirm: "#{t('steam.accounts.components.layout.disable_confirm')}: #{account.steam_id}?"
+                              },
+                              class: 'btn btn-sm -success') do %>
+                    <i class="bi bi-toggle-on"></i>
+                  <% end %>
+                <% end %>
+                <% if disabled?(account) && can?(:enable, Steam::Account) %>
+                  <%= link_to(enable_steam_account_path(account),
+                              data: {
+                                turbo_method: :patch,
+                                turbo_confirm: "#{t('steam.accounts.components.layout.enable_confirm')}: #{account.steam_id}?"
+                              },
+                              class: 'btn btn-sm -danger') do %>
+                    <i class="bi bi-toggle-off"></i>
+                  <% end %>
+                <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%=
+  render partial: 'layouts/components/index/footer',
+         locals: {
+           resource: @steam_accounts
+         }
+%>
