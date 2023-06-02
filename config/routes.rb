@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   end
 
   namespace :steam do
-    resources :accounts, only: :index
+    resources :accounts, only: [:index, :new, :create]
   end
 
   namespace :admin do
