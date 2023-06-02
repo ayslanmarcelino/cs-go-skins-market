@@ -4,6 +4,8 @@ class Steam::AccountsController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @steam_accounts = Steam::Account.accessible_by(current_ability)
+    @query = Steam::Account.accessible_by(current_ability).page(params[:page]).ransack(params[:q])
+
+    @steam_accounts = @query.result(distinct: false)
   end
 end
