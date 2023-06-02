@@ -31,6 +31,16 @@ class Steam::Account < ApplicationRecord
   belongs_to :user
   belongs_to :enterprise
 
-  validates :steam_id, :steam_custom_id, presence: true
-  validates :steam_id, :steam_custom_id, uniqueness: { scope: [:user_id, :enterprise_id] }
+  validates :steam_custom_id, presence: true
+  validates :steam_custom_id, uniqueness: { scope: [:user_id, :enterprise_id] }
+
+  def self.permitted_params
+    [
+      :id,
+      :active,
+      :steam_custom_id,
+      :enterprise_id,
+      :user_id
+    ]
+  end
 end
