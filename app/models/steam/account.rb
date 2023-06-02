@@ -3,6 +3,7 @@
 # Table name: steam_accounts
 #
 #  id                :bigint           not null, primary key
+#  active            :boolean          default(TRUE)
 #  avatar_full_url   :string
 #  avatar_medium_url :string
 #  avatar_url        :string

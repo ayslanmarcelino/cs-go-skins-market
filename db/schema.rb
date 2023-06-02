@@ -102,6 +102,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
     t.string "avatar_medium_url"
     t.string "avatar_full_url"
     t.string "real_name"
+    t.boolean "active", default: true
     t.bigint "user_id"
     t.bigint "enterprise_id"
     t.datetime "created_at", null: false
