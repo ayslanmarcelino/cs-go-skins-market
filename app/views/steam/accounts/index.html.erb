@@ -13,6 +13,7 @@
           <th><%= sort_link(@query, :nickname, t('.nickname')) %></th>
           <th><%= t('.avatar') %></th>
           <th><%= sort_link(@query, :real_name, t('.real_name')) %></th>
+          <th><%= t('.status') %></th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -25,6 +26,9 @@
             <td><%= account.nickname %></td>
             <td><%= image_tag(account.avatar_url) %></td>
             <td><%= account.real_name %></td>
+            <td class="status">
+              <span class="<%= active?(account.active) %>"></span>
+            </td>
           </tr>
         <% end %>
       </tbody>
