@@ -98,8 +98,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
     t.bigint "steam_id"
     t.string "url"
     t.bigint "user_id"
+    t.bigint "enterprise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_steam_accounts_on_enterprise_id"
     t.index ["user_id"], name: "index_steam_accounts_on_user_id"
   end
 
@@ -143,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
+  add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
