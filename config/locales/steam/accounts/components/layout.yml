@@ -1,0 +1,8 @@
+pt-BR:
+  steam:
+    accounts:
+      components:
+        layout:
+          resource: Contas steam
+          delete_confirm: Você deseja EXCLUIR a conta steam
+          new: Nova conta steam

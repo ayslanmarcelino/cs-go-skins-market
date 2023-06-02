@@ -1,0 +1,10 @@
+pt-BR:
+  steam:
+    accounts:
+      index:
+        steam_id: ID
+        steam_custom_id: ID personalizado
+        profile_url: URL
+        nickname: Nome do perfil
+        avatar: Avatar
+        real_name: Nome verdadeiro
