@@ -14,7 +14,7 @@ module Steam
         private
 
         def update!
-          return unless steam_account_params.present?
+          return if steam_account_params.blank?
 
           @steam_account.update(
             steam_id: steam_account_params['steamid'],

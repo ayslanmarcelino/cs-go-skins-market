@@ -32,6 +32,3 @@ module Steam
     end
   end
 end
-
-
-

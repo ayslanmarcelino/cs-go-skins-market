@@ -22,7 +22,9 @@ module Steam
           update_steam_account!
 
           @steam_account.save if @updated_steam_account
-          flash[:danger] = 'Conta não existe. Favor preencher com a URL personalizada do seu perfil.' if @updated_steam_account.nil?
+          if @updated_steam_account.nil?
+            flash[:danger] = 'Conta não existe. Favor preencher com a URL personalizada do seu perfil.'
+          end
         end
 
         redirect_to(steam_accounts_path)
