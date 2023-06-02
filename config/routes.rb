@@ -33,6 +33,11 @@ Rails.application.routes.draw do
   resources :clients, only: [:index, :new, :create]
 
   namespace :steam do
-    resources :accounts, only: [:index, :new, :create, :update, :destroy]
+    resources :accounts, only: [:index, :new, :create, :update, :destroy] do
+      member do
+        patch :disable
+        patch :enable
+      end
+    end
   end
 end

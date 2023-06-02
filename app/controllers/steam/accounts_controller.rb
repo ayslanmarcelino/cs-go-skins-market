@@ -2,7 +2,7 @@ module Steam
   class AccountsController < ApplicationController
     load_and_authorize_resource
 
-    before_action :steam_account, only: :update
+    before_action :steam_account, only: [:update, :disable, :enable]
 
     def index
       @query = Steam::Account.accessible_by(current_ability).page(params[:page]).ransack(params[:q])
@@ -39,6 +39,24 @@ module Steam
       flash[:success] = 'Conta Steam atualizada com sucesso.'
     end
 
+    def disable
+      if @steam_account.active?
+        disable!(@steam_account)
+        redirect_success(path: steam_accounts_path, action: 'desativada')
+      else
+        redirect_failed(path: steam_accounts_path, action: 'desativada')
+      end
+    end
+
+    def enable
+      if disabled?(@steam_account)
+        activate!(@steam_account)
+        redirect_success(path: steam_accounts_path, action: 'ativada')
+      else
+        redirect_failed(path: steam_accounts_path, action: 'ativada')
+      end
+    end
+
     private
 
     def account_params
@@ -53,6 +71,11 @@ module Steam
 
     def update_steam_account!(persisted: nil)
       @updated_steam_account = Steam::Accounts::Players::Update.call(steam_account: @steam_account, persisted: persisted)
+    end
+
+    def redirect_success(path:, action:)
+      redirect_to(path)
+      flash[:success] = "Conta da Steam #{action} com sucesso."
     end
   end
 end
