@@ -2,14 +2,18 @@
 #
 # Table name: steam_accounts
 #
-#  id            :bigint           not null, primary key
-#  description   :string
-#  url           :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  enterprise_id :bigint
-#  steam_id      :bigint
-#  user_id       :bigint
+#  id                :bigint           not null, primary key
+#  avatar_full_url   :string
+#  avatar_medium_url :string
+#  avatar_url        :string
+#  nickname          :string
+#  real_name         :string
+#  steam_url         :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  enterprise_id     :bigint
+#  steam_id          :string
+#  user_id           :bigint
 #
 # Indexes
 #
@@ -25,6 +29,6 @@ class Steam::Account < ApplicationRecord
   belongs_to :user
   belongs_to :enterprise
 
-  validates :description, :url, :steam_id, presence: true
-  validates :description, :url, :steam_id, uniqueness: { scope: [:user_id, :enterprise_id] }
+  validates :steam_id, :steam_url, presence: true
+  validates :steam_id, :steam_url, uniqueness: { scope: [:user_id, :enterprise_id] }
 end

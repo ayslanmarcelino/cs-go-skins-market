@@ -2,14 +2,18 @@
 #
 # Table name: steam_accounts
 #
-#  id            :bigint           not null, primary key
-#  description   :string
-#  url           :string
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  enterprise_id :bigint
-#  steam_id      :bigint
-#  user_id       :bigint
+#  id                :bigint           not null, primary key
+#  avatar_full_url   :string
+#  avatar_medium_url :string
+#  avatar_url        :string
+#  nickname          :string
+#  real_name         :string
+#  steam_url         :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  enterprise_id     :bigint
+#  steam_id          :string
+#  user_id           :bigint
 #
 # Indexes
 #
@@ -30,11 +34,9 @@ RSpec.describe Steam::Account, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:description) }
-    it { is_expected.to validate_presence_of(:url) }
+    it { is_expected.to validate_presence_of(:steam_url) }
     it { is_expected.to validate_presence_of(:steam_id) }
-    it { is_expected.to validate_uniqueness_of(:description).scoped_to(:user_id, :enterprise_id) }
-    it { is_expected.to validate_uniqueness_of(:url).scoped_to(:user_id, :enterprise_id) }
+    it { is_expected.to validate_uniqueness_of(:steam_url).scoped_to(:user_id, :enterprise_id) }
     it { is_expected.to validate_uniqueness_of(:steam_id).scoped_to(:user_id, :enterprise_id) }
   end
 end
