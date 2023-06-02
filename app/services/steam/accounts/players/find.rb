@@ -2,8 +2,9 @@ module Steam
   module Accounts
     module Players
       class Find < ApplicationService
-        def initialize(steam_custom_id:)
+        def initialize(steam_custom_id:, persisted: false)
           @steam_custom_id = steam_custom_id
+          @persisted = persisted
         end
 
         def call
@@ -21,7 +22,7 @@ module Steam
         end
 
         def steam_id
-          @steam_id ||= Steam::Accounts::SteamIds::Find.call(steam_custom_id: @steam_custom_id)
+          @steam_id ||= @persisted ? @steam_custom_id : Steam::Accounts::SteamIds::Find.call(steam_custom_id: @steam_custom_id)
         end
 
         def endpoint

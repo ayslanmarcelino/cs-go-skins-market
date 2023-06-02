@@ -2,6 +2,8 @@ module Steam
   class AccountsController < ApplicationController
     load_and_authorize_resource
 
+    before_action :steam_account, only: :update
+
     def index
       @query = Steam::Account.accessible_by(current_ability).page(params[:page]).ransack(params[:q])
 
@@ -30,6 +32,13 @@ module Steam
       end
     end
 
+    def update
+      update_steam_account!(persisted: true)
+
+      redirect_to(steam_accounts_path)
+      flash[:success] = 'Conta Steam atualizada com sucesso.'
+    end
+
     private
 
     def account_params
@@ -38,8 +47,12 @@ module Steam
             .merge(owner: current_user, enterprise: current_user.current_enterprise)
     end
 
-    def update_steam_account!
-      @updated_steam_account = Steam::Accounts::Players::Update.call(steam_account: @steam_account)
+    def steam_account
+      @steam_account ||= Steam::Account.find(params[:id])
+    end
+
+    def update_steam_account!(persisted: nil)
+      @updated_steam_account = Steam::Accounts::Players::Update.call(steam_account: @steam_account, persisted: persisted)
     end
   end
 end

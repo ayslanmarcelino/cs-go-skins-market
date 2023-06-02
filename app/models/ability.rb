@@ -54,7 +54,7 @@ class Ability
       can(:create, User)
       can([:read, :update, :destroy], User::Role, enterprise: @enterprise, kind_cd: User::Role::USER_KINDS.map(&:to_s))
       can(:create, User::Role, enterprise: @enterprise)
-      can([:read, :create, :destroy], Steam::Account, enterprise: @enterprise, user: @user)
+      can([:read, :create, :update, :destroy], Steam::Account, enterprise: @enterprise, user: @user)
     end
 
     def viewer_abilities

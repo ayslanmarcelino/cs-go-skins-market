@@ -36,6 +36,18 @@
             <td class="status">
               <span class="<%= active?(account.active) %>"></span>
             </td>
+            <td>
+              <% if can?(:update, Steam::Account) %>
+                <%= link_to(steam_account_path(account),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('steam.accounts.components.layout.update')}: #{account.steam_id}?"
+                            },
+                            class: 'btn btn-sm') do %>
+                  <i class="bi bi-arrow-repeat"></i>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -4,5 +4,6 @@ pt-BR:
       components:
         layout:
           resource: Contas Steam
+          update: Você deseja ATUALIZAR as informações da conta steam
           delete_confirm: Você deseja EXCLUIR a conta steam
           new: Nova conta steam
