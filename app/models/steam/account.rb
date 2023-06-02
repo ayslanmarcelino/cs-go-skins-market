@@ -23,6 +23,7 @@
 #
 class Steam::Account < ApplicationRecord
   belongs_to :user
+  belongs_to :enterprise
 
   validates :description, :url, :steam_id, presence: true
   validates :description, :url, :steam_id, uniqueness: { scope: [:user_id, :enterprise_id] }
