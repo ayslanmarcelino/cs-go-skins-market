@@ -85,4 +85,11 @@ pt-BR:
         created_at: Criado em
         updated_at: Atualizado em
       steam/account:
+        id: Código
+        steam_id: ID da Steam
         steam_custom_id: ID personalizado
+        nickname: Nome do perfil
+        real_name: Nome verdadeiro
+        owner: Proprietário
+        enterprise: Empresa
+        active: Ativo
