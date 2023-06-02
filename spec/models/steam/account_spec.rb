@@ -7,11 +7,12 @@
 #  avatar_medium_url :string
 #  avatar_url        :string
 #  nickname          :string
+#  profile_url       :string
 #  real_name         :string
-#  steam_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  enterprise_id     :bigint
+#  steam_custom_id   :string
 #  steam_id          :string
 #  user_id           :bigint
 #
@@ -34,9 +35,9 @@ RSpec.describe Steam::Account, type: :model do
   end
 
   describe 'validations' do
-    it { is_expected.to validate_presence_of(:steam_url) }
+    it { is_expected.to validate_presence_of(:steam_custom_id) }
     it { is_expected.to validate_presence_of(:steam_id) }
-    it { is_expected.to validate_uniqueness_of(:steam_url).scoped_to(:user_id, :enterprise_id) }
+    it { is_expected.to validate_uniqueness_of(:steam_custom_id).scoped_to(:user_id, :enterprise_id) }
     it { is_expected.to validate_uniqueness_of(:steam_id).scoped_to(:user_id, :enterprise_id) }
   end
 end

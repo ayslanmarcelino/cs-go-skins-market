@@ -7,11 +7,12 @@
 #  avatar_medium_url :string
 #  avatar_url        :string
 #  nickname          :string
+#  profile_url       :string
 #  real_name         :string
-#  steam_url         :string
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  enterprise_id     :bigint
+#  steam_custom_id   :string
 #  steam_id          :string
 #  user_id           :bigint
 #
@@ -29,6 +30,6 @@ class Steam::Account < ApplicationRecord
   belongs_to :user
   belongs_to :enterprise
 
-  validates :steam_id, :steam_url, presence: true
-  validates :steam_id, :steam_url, uniqueness: { scope: [:user_id, :enterprise_id] }
+  validates :steam_id, :steam_custom_id, presence: true
+  validates :steam_id, :steam_custom_id, uniqueness: { scope: [:user_id, :enterprise_id] }
 end

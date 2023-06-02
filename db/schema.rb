@@ -95,7 +95,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
 
   create_table "steam_accounts", force: :cascade do |t|
     t.string "steam_id"
-    t.string "steam_url"
+    t.string "steam_custom_id"
+    t.string "profile_url"
     t.string "nickname"
     t.string "avatar_url"
     t.string "avatar_medium_url"
