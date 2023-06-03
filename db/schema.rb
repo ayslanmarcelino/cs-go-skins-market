@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_03_172420) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -102,8 +102,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
     t.string "image"
     t.string "inspect_url"
     t.string "name_tag"
-    t.string "type"
-    t.string "gun_type"
+    t.string "kind"
+    t.string "gun_kind"
     t.float "float"
     t.float "steam_price", default: 0.0
     t.float "first_steam_price", default: 0.0
@@ -111,11 +111,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
     t.float "amount_paid", default: 0.0
     t.float "sale_value", default: 0.0
     t.boolean "stattrak", default: false
-    t.boolean "sticker", default: false
+    t.boolean "has_sticker", default: false
     t.boolean "available", default: true
     t.boolean "has_name_tag", default: false
-    t.string "name_sticker", default: [], array: true
-    t.string "image_sticker", default: [], array: true
+    t.string "sticker_name", default: "{}"
+    t.string "sticker_image", default: [], array: true
     t.datetime "expiration_date"
     t.bigint "steam_account_id"
     t.datetime "created_at", null: false

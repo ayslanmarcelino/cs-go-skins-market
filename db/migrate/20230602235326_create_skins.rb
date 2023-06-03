@@ -9,8 +9,8 @@ class CreateSkins < ActiveRecord::Migration[7.0]
       t.string :image
       t.string :inspect_url
       t.string :name_tag
-      t.string :type
-      t.string :gun_type
+      t.string :kind
+      t.string :gun_kind
 
       t.float :float
       t.float :steam_price, default: 0
@@ -20,12 +20,12 @@ class CreateSkins < ActiveRecord::Migration[7.0]
       t.float :sale_value, default: 0
 
       t.boolean :stattrak, default: false
-      t.boolean :sticker, default: false
+      t.boolean :has_sticker, default: false
       t.boolean :available, default: true
       t.boolean :has_name_tag, default: false
 
-      t.string :name_sticker, array: true, default: []
-      t.string :image_sticker, array: true, default: []
+      t.string :sticker_name, array: true, default: []
+      t.string :sticker_image, array: true, default: []
 
       t.datetime :expiration_date
 
