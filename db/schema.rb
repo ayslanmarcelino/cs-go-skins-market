@@ -95,12 +95,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
 
   create_table "skins", force: :cascade do |t|
     t.bigint "steam_id"
-    t.string "description"
-    t.string "description_color"
+    t.string "name"
+    t.string "market_name"
+    t.string "name_color"
     t.string "exterior"
     t.string "image"
     t.string "inspect_url"
-    t.string "description_name_tag"
+    t.string "name_tag"
     t.string "type"
     t.string "gun_type"
     t.float "float"
@@ -112,7 +113,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
     t.boolean "stattrak", default: false
     t.boolean "sticker", default: false
     t.boolean "available", default: true
-    t.boolean "name_tag", default: false
+    t.boolean "has_name_tag", default: false
     t.string "name_sticker", default: [], array: true
     t.string "image_sticker", default: [], array: true
     t.datetime "expiration_date"
