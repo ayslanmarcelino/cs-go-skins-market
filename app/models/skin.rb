@@ -10,21 +10,21 @@
 #  exterior          :string
 #  first_steam_price :float            default(0.0)
 #  float             :float
-#  gun_type          :string
+#  gun_kind          :string
 #  has_name_tag      :boolean          default(FALSE)
+#  has_sticker       :boolean          default(FALSE)
 #  image             :string
-#  image_sticker     :string           default([]), is an Array
 #  inspect_url       :string
+#  kind              :string
 #  market_name       :string
 #  name              :string
 #  name_color        :string
-#  name_sticker      :string           default([]), is an Array
 #  name_tag          :string
 #  sale_value        :float            default(0.0)
 #  stattrak          :boolean          default(FALSE)
 #  steam_price       :float            default(0.0)
-#  sticker           :boolean          default(FALSE)
-#  type              :string
+#  sticker_image     :string           default([]), is an Array
+#  sticker_name      :string           default("{}")
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  steam_account_id  :bigint
@@ -39,4 +39,14 @@
 #  fk_rails_...  (steam_account_id => steam_accounts.id)
 #
 class Skin < ApplicationRecord
+  belongs_to :steam_account, class_name: 'Steam::Account'
+
+  REJECT_TYPES = [
+    'Grafite (Nível Básico)',
+    'Recipiente (Nível Básico)',
+    'Ferramenta (Nível Básico)'
+  ].freeze
+
+  def self.permitted_params
+  end
 end
