@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_02_235326) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,35 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
     t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
   end
 
+  create_table "skins", force: :cascade do |t|
+    t.bigint "steam_id"
+    t.string "description"
+    t.string "description_color"
+    t.string "exterior"
+    t.string "image"
+    t.string "inspect_url"
+    t.string "description_name_tag"
+    t.string "type"
+    t.string "gun_type"
+    t.float "float"
+    t.float "steam_price", default: 0.0
+    t.float "first_steam_price", default: 0.0
+    t.float "csmoney_price", default: 0.0
+    t.float "amount_paid", default: 0.0
+    t.float "sale_value", default: 0.0
+    t.boolean "stattrak", default: false
+    t.boolean "sticker", default: false
+    t.boolean "available", default: true
+    t.boolean "name_tag", default: false
+    t.string "name_sticker", default: [], array: true
+    t.string "image_sticker", default: [], array: true
+    t.datetime "expiration_date"
+    t.bigint "steam_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["steam_account_id"], name: "index_skins_on_steam_account_id"
+  end
+
   create_table "steam_accounts", force: :cascade do |t|
     t.string "steam_id"
     t.string "steam_custom_id"
@@ -151,6 +180,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
+  add_foreign_key "skins", "steam_accounts"
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
   add_foreign_key "user_roles", "enterprises"
