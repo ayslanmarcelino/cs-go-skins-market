@@ -12,19 +12,23 @@ module Steam
       private
 
       def create!
-        # Skins::Create.call(request: @request, skins: @skins, inventory: @inventory)
+        ::Skins::Create.call(request: request, skins: skins, inventory: inventory)
       end
 
       def inventory
-        @inventory ||= JSON.parse(@params)['assets']
+        @inventory ||= parsed_json['assets']
       end
 
       def skins
-        @skins ||= JSON.parse(@params)['descriptions'].reverse
+        @skins ||= parsed_json['descriptions'].reverse
+      end
+
+      def parsed_json
+        @parsed_json ||= JSON.parse(request)
       end
 
       def request
-        @request ||= Steam::Request.call(steam_id: steam_id)
+        @request ||= Steam::Request.call(steam_id: @steam_id)
       end
     end
   end
