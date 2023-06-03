@@ -1,18 +1,18 @@
 # frozen_string_literal: true
 
 module Steam
-  class Requisition < ApplicationService
+  class Request < ApplicationService
     def initialize(steam_id:)
       @steam_id = steam_id
     end
 
     def call
-      requisition
+      request
     end
 
     private
 
-    def requisition
+    def request
       response.body
     end
 
