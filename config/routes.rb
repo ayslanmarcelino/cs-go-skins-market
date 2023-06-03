@@ -30,14 +30,18 @@ Rails.application.routes.draw do
     resources :roles, only: [:index, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :clients, only: [:index, :new, :create]
-
   namespace :steam do
     resources :accounts, only: [:index, :new, :create, :update, :destroy] do
       member do
         patch :disable
         patch :enable
       end
+    end
+  end
+
+  resources :skins, only: [:index] do
+    collection do
+      post 'search'
     end
   end
 end
