@@ -4,6 +4,8 @@ class CreateTransactionTypes < ActiveRecord::Migration[7.0]
       t.string :description
       t.integer :counter, default: 0
 
+      t.references :enterprise, foreign_key: true
+
       t.timestamps
     end
   end

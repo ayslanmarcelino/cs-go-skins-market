@@ -152,8 +152,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_222047) do
   create_table "transaction_types", force: :cascade do |t|
     t.string "description"
     t.integer "counter", default: 0
+    t.bigint "enterprise_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_transaction_types_on_enterprise_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -200,6 +202,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_222047) do
   add_foreign_key "skins", "steam_accounts"
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
+  add_foreign_key "transaction_types", "enterprises"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
   add_foreign_key "user_roles", "users", column: "created_by_id"
