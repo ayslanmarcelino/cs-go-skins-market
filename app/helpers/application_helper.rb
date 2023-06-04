@@ -60,9 +60,10 @@ module ApplicationHelper
 
     days_left = (skin.expiration_date.to_date - Date.current).to_i
 
-    if days_left == 0
+    case days_left
+    when 0
       'Hoje'
-    elsif days_left == 1
+    when 1
       "#{days_left} dia"
     else
       "#{days_left} dias"

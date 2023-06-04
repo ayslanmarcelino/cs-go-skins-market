@@ -13,7 +13,7 @@ module Skins
       end
 
       private
-      
+
       def create!
         Skin::Log.create!(
           steam_price: @steam_price,
