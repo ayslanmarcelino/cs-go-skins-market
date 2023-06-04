@@ -16,7 +16,7 @@
     <% end %>
   </div>
   <div class="col-md-7">
-    <% if @skin.expiration_date > Time.current %>
+    <% if @skin.expiration_date.present? && (@skin.expiration_date > Time.current) %>
       <span>
         <i class="bi bi-lock"></i>
         <%= tradelock_time(@skin) %>
