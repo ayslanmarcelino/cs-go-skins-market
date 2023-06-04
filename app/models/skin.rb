@@ -49,6 +49,8 @@ class Skin < ApplicationRecord
 
   validates :steam_id, uniqueness: { scope: [:steam_account_id] }
 
+  has_many :logs
+
   def self.permitted_params
     [
       :id,

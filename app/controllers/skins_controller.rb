@@ -2,7 +2,7 @@ class SkinsController < ApplicationController
   load_and_authorize_resource
 
   before_action :steam_account, only: :search
-  before_action :skin, only: [:edit, :disable, :enable]
+  before_action :skin, only: [:show, :edit, :disable, :enable]
   before_action :steam_accounts, only: :index
 
   def index
@@ -14,6 +14,8 @@ class SkinsController < ApplicationController
 
     @skins = @query.result(distinct: false)
   end
+
+  def show; end
 
   def edit; end
 

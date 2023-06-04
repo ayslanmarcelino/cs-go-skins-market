@@ -30,5 +30,6 @@ pt-BR:
       - :year
   time:
     formats:
+      default: ! '%d/%m/%Y às %H:%M'
       long: ! '%d/%m/%Y - %H:%M:%S'
       chart: ! '%m/%Y'
