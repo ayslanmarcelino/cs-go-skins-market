@@ -17,8 +17,12 @@ module Steam
             return 'Nenhum' if @skin['descriptions'].blank?
 
             @skin['descriptions'].each do |description|
-              return description['value'].partition('Exterior: ').last if description['value'].include?('Exterior:')
+              if description['value'].include?('Exterior:')
+                return description['value'].partition('Exterior: ').last
+              end
             end
+
+            'Nenhum'
           end
         end
       end

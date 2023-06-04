@@ -16,10 +16,12 @@ module Steam
           private
 
           def generate
-            base_url + dynamic_skin + inspect_url_code
+            "#{base_url}#{dynamic_skin}#{inspect_url_code}"
           end
 
           def inspect_url_code
+            return if inspect_url.blank?
+
             inspect_url.match(/%D(\d+)/)[1]
           end
 
