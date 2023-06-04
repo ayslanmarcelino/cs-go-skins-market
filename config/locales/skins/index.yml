@@ -1,0 +1,11 @@
+pt-BR:
+  skins:
+    index:
+      name: Nome
+      exterior: Exterior
+      first_steam_price: Primeiro preço Steam
+      steam_price: Preço Steam
+      csmoney_price: Preço CS.Money
+      sale_value: Preço venda
+      steam_account: Conta
+      status: Disponível

@@ -1,0 +1,8 @@
+pt-BR:
+  skins:
+    components:
+      layout:
+        resource: Skins
+        show: Você está visualizando a skin
+        enable_confirm: Você deseja ATIVAR a skin
+        disable_confirm: Você deseja DESATIVAR a skin
