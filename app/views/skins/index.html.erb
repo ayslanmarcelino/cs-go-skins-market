@@ -1,15 +1,59 @@
-<%= form_with url: search_skins_path, method: :post do |form| %>
-  <%= form.collection_select(:steam_account_id, Steam::Account.all, :id, :steam_custom_id, {include_blank: t('.select_account')}, { class: 'form-control', required: true }) %>
-  <div class="modal-footer">
-    <a class="btn btn-secondary text-white" data-dismiss="modal">
-      <i class="fas fa-close"></i>
-      <%= t('.cancel') %>
-    </a>
-    <%= button_tag(type: 'submit', class: 'btn btn-dark', data: { disable_with: 'Buscando novas skins...' }) do %>
-      <i class="fas fa-search"></i>
-      <%= t('.search') %>
-    <% end %>
+<div class="row col-md-12">
+  <h4><%= t('skins.components.layout.resource') %></h4>
+  <%= form_with url: search_skins_path, method: :post do |form| %>
+    <%= form.collection_select(:steam_account_id, Steam::Account.all, :id, :steam_custom_id, {include_blank: t('.select_account')}, { class: 'form-control', required: true }) %>
+    <div class="modal-footer">
+      <a class="btn btn-secondary text-white" data-dismiss="modal">
+        <i class="fas fa-close"></i>
+        <%= t('.cancel') %>
+      </a>
+      <%= button_tag(type: 'submit', class: 'btn btn-dark', data: { disable_with: 'Buscando novas skins...' }) do %>
+        <i class="fas fa-search"></i>
+        <%= t('.search') %>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= sort_link(@query, :name, t('.name')) %></th>
+          <th><%= sort_link(@query, :exterior, t('.exterior')) %></th>
+          <th><%= sort_link(@query, :first_steam_price, t('.first_steam_price')) %></th>
+          <th><%= sort_link(@query, :steam_price, t('.steam_price')) %></th>
+          <th><%= sort_link(@query, :csmoney_price, t('.csmoney_price')) %></th>
+          <th><%= sort_link(@query, :sale_value, t('.sale_value')) %></th>
+          <th><%= sort_link(@query, :steam_account_nickname, t('.steam_account')) %></th>
+          <th><%= t('.status') %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @skins.each do |skin| %>
+          <tr>
+            <td>
+              <div style="border-left: 3px solid #<%= skin.name_color %>;">
+                <span style="margin-left: 1%;"><%= skin.name %></span>
+              </div>
+            </td>
+            <td><%= skin.exterior %></td>
+            <td><%= number_to_currency(skin.first_steam_price) %></td>
+            <td><%= number_to_currency(skin.steam_price) %></td>
+            <td><%= number_to_currency(skin.csmoney_price) %></td>
+            <td><%= number_to_currency(skin.sale_value) %></td>
+            <td><%= skin.steam_account.nickname %></td>
+            <td class="status">
+              <span class="<%= active?(skin.available) %>"></span>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-<% end %>
-
-<%= @skins %>
+</div>
+<%=
+  render partial: 'layouts/components/index/footer',
+         locals: {
+           resource: @skins
+         }
+%>
