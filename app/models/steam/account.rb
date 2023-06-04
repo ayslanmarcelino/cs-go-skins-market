@@ -43,4 +43,8 @@ class Steam::Account < ApplicationRecord
       :owner_id
     ]
   end
+
+  def formatted_name
+    "#{steam_id} | #{steam_custom_id}"
+  end
 end

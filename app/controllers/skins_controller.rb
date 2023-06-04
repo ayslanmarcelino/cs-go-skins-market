@@ -2,6 +2,7 @@ class SkinsController < ApplicationController
   load_and_authorize_resource
 
   before_action :steam_account, only: :search
+  before_action :steam_accounts, only: :index
 
   def index
     @query = Skin.includes(:steam_account)
@@ -21,5 +22,9 @@ class SkinsController < ApplicationController
 
   def steam_account
     @steam_account ||= Steam::Account.find(params.require(:steam_account_id))
+  end
+
+  def steam_accounts
+    @steam_accounts ||= Steam::Account.where(owner: current_user, active: true)
   end
 end

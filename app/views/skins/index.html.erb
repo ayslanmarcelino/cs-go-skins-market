@@ -2,7 +2,9 @@
   <h4><%= t('skins.components.layout.resource') %></h4>
   <div>
     <div class="pull-right mb-2">
-      <%= render partial: 'skins/components/modal_search' %>
+      <% if can?(:search, Skin) %>
+        <%= render partial: 'skins/components/modal_search' %>
+      <% end %>
     </div>
   </div>
   <div class="table-wrap">

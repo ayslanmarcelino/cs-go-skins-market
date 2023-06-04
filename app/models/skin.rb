@@ -39,13 +39,15 @@
 #  fk_rails_...  (steam_account_id => steam_accounts.id)
 #
 class Skin < ApplicationRecord
-  belongs_to :steam_account, class_name: 'Steam::Account'
-
   REJECT_TYPES = [
     'Grafite (Nível Básico)',
     'Recipiente (Nível Básico)',
     'Ferramenta (Nível Básico)'
   ].freeze
+
+  belongs_to :steam_account, class_name: 'Steam::Account'
+
+  validates :steam_id, uniqueness: { scope: [:steam_account_id] }
 
   def self.permitted_params; end
 end

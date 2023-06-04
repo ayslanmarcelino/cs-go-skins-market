@@ -8,7 +8,7 @@
     <div class="modal-content">
       <div class="modal-body">
         <%= form_with(url: search_skins_path, method: :post) do |form| %>
-          <%= form.collection_select(:steam_account_id, Steam::Account.all, :id, :steam_custom_id, { include_blank: t('application.select') }, { class: 'form-control', required: true }) %>
+          <%= form.collection_select(:steam_account_id, @steam_accounts, :id, :formatted_name, { include_blank: t('application.select') }, { class: 'form-control', required: true }) %>
           <div class="pull-right mt-2">
             <a class="btn btn-secondary text-white" data-dismiss="modal">
               <i class="bi bi-x-lg"></i>
