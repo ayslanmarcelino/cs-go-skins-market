@@ -18,7 +18,7 @@ class SkinsController < ApplicationController
   def edit; end
 
   def update
-    if @skin.update(skin_params)
+    if @skin.update(skin_params) && @skin.available?
       redirect_success(path: skins_path, action: 'atualizada')
     else
       render(:edit, status: :unprocessable_entity)
@@ -32,18 +32,18 @@ class SkinsController < ApplicationController
   def disable
     if @skin.available?
       make_unavailable!(@skin)
-      redirect_success(path: skins_path, action: 'indisponível')
+      redirect_success(path: skins_path, action: 'marcada como indisponível')
     else
-      redirect_failed(path: skins_path, action: 'indisponível')
+      redirect_failed(path: skins_path, action: 'marcada como indisponível')
     end
   end
 
   def enable
     if unavailable?(@skin)
       make_available!(@skin)
-      redirect_success(path: skins_path, action: 'disponível')
+      redirect_success(path: skins_path, action: 'marcada como disponível')
     else
-      redirect_failed(path: skins_path, action: 'disponível')
+      redirect_failed(path: skins_path, action: 'marcada como disponível')
     end
   end
 
@@ -68,6 +68,6 @@ class SkinsController < ApplicationController
 
   def redirect_success(path:, action:)
     redirect_to(path)
-    flash[:success] = "Skin marcada como #{action} com sucesso."
+    flash[:success] = "Skin #{action} com sucesso."
   end
 end

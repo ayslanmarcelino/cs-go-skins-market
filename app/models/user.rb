@@ -45,7 +45,7 @@ class User < ApplicationRecord
   belongs_to :created_by, class_name: 'User', optional: true
 
   has_many :roles, dependent: :destroy
-  has_many :accounts, class_name: 'Steam::Account', foreign_key: 'owner_id'
+  has_many :accounts, class_name: 'Steam::Account', foreign_key: 'owner_id', inverse_of: :owner
 
   accepts_nested_attributes_for :person
 
