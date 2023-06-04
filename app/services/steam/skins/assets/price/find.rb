@@ -26,6 +26,8 @@ module Steam
           end
 
           def response
+            sleep(3)
+
             @response ||= RestClient.get(endpoint)
           end
 

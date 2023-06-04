@@ -22,6 +22,8 @@ module Steam
                   return description['value'].scan(/https?:\/\/[\S]+?png/)
                 end
               end
+
+              nil
             end
           end
         end

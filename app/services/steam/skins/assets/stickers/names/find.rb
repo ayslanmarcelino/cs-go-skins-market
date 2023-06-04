@@ -18,10 +18,14 @@ module Steam
               return if @skin['descriptions'].blank?
 
               @skin['descriptions'].each do |description|
-                if description['value'].include?('sticker_info')
+                if description['value'].include?('sticker_info') && description['value'].include?('Adesivo')
                   return description['value'].match(/Adesivo: (.*?)<\/center>/)[1]
+                elsif description['value'].include?('sticker_info') && description['value'].include?('Emblema')
+                  return description['value'].match(/Emblema: (.*?)<\/center>/)[1]
                 end
               end
+
+              nil
             end
           end
         end
