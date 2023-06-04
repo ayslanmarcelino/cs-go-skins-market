@@ -3,11 +3,16 @@
     <%= image_tag(@skin.image, width: '100%') %>
   </div>
   <div class="col-md-7">
-    <h4><%= @skin.name %></h4>
+    <h4 style="border-left: 3px solid #<%= @skin.name_color %>;">
+      <span style="margin-left: 2%;"><%= @skin.name %></span>
+    </h4>
+    <div>
+      <%= @skin.exterior %>
+    </div>
     <div class="skin">
-      <% if @skin.float.positive? %>
+      <% if @skin.float&.positive? %>
         <div class="float">
-          <i class="bi bi-caret-down-fill" style="margin-left: <%= @skin.float * 100 %>%; margin-top: -11px;"></i>
+          <i class="bi bi-caret-down-fill" style="margin-left: <%= @skin.float * 100 %>%; font-size: 10px;"></i>
           <div class="progress chart"></div>
         </div>
       <% end %>
