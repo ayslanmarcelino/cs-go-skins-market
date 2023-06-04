@@ -26,7 +26,8 @@
       <% if @skin.float&.positive? %>
         <div class="float">
           <i class="bi bi-caret-down-fill" style="margin-left: <%= @skin.float * 100 %>%; font-size: 10px;"></i>
-          <div class="progress chart"></div>
+          <div class="progress"></div>
+          <div class="numeric"><%= @skin.float %></div>
         </div>
       <% end %>
 
