@@ -49,5 +49,12 @@ class Skin < ApplicationRecord
 
   validates :steam_id, uniqueness: { scope: [:steam_account_id] }
 
-  def self.permitted_params; end
+  def self.permitted_params
+    [
+      :id,
+      :float,
+      :csmoney_price,
+      :sale_value
+    ]
+  end
 end

@@ -93,3 +93,7 @@ pt-BR:
         owner: Proprietário
         enterprise: Empresa
         active: Ativo
+      skin:
+        float: Float
+        csmoney_price: Preço CS.Money
+        sale_value: Preço de venda

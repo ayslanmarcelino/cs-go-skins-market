@@ -39,7 +39,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :skins, only: [:index] do
+  resources :skins, only: [:index, :edit, :update] do
     collection do
       post 'search'
     end

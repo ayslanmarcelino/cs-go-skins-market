@@ -2,7 +2,7 @@ class SkinsController < ApplicationController
   load_and_authorize_resource
 
   before_action :steam_account, only: :search
-  before_action :skin, only: [:disable, :enable]
+  before_action :skin, only: [:edit, :disable, :enable]
   before_action :steam_accounts, only: :index
 
   def index
@@ -13,6 +13,16 @@ class SkinsController < ApplicationController
                  .ransack(params[:q])
 
     @skins = @query.result(distinct: false)
+  end
+
+  def edit; end
+
+  def update
+    if @skin.update(skin_params)
+      redirect_success(path: skins_path, action: 'atualizada')
+    else
+      render(:edit, status: :unprocessable_entity)
+    end
   end
 
   def search
@@ -38,6 +48,11 @@ class SkinsController < ApplicationController
   end
 
   private
+
+  def skin_params
+    params.require(:skin)
+          .permit(Skin.permitted_params)
+  end
 
   def steam_account
     @steam_account ||= Steam::Account.find(params.require(:steam_account_id))
