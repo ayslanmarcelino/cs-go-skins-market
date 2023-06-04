@@ -6,7 +6,7 @@ class SkinsController < ApplicationController
   end
 
   def search
-    @skins ||= Steam::Skins::Create.call(steam_id: steam_account.steam_id)
+    @skins ||= Steam::Skins::Create.call(steam_account: steam_account)
   end
 
   private

@@ -1,8 +1,8 @@
 module Steam
   module Skins
     class Create < ApplicationService
-      def initialize(steam_id:)
-        @steam_id = steam_id
+      def initialize(steam_account:)
+        @steam_account = steam_account
       end
 
       def call
@@ -12,7 +12,7 @@ module Steam
       private
 
       def create!
-        ::Skins::Create.call(request: request, skins: skins, inventory: inventory)
+        ::Skins::Create.call(steam_account: @steam_account, skins: skins, inventory: inventory)
       end
 
       def inventory
@@ -28,7 +28,7 @@ module Steam
       end
 
       def request
-        @request ||= Steam::Request.call(steam_id: @steam_id)
+        @request ||= Steam::Request.call(steam_id: @steam_account.steam_id)
       end
     end
   end
