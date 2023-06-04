@@ -1,6 +1,15 @@
 <div class="d-inline-flex p-5 row col-md-12">
   <div class="col-md-5">
     <%= image_tag(@skin.image, width: '100%') %>
+    <% if @skin.has_sticker? %>
+      <div class="stickers d-inline-flex align-items-center">
+        <% @skin.sticker_image.each_with_index do |sticker, index| %>
+          <div title="<%= @skin.sticker_name.split(', ')[index] %>">
+            <%= image_tag(sticker, width: '100%') %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <div class="col-md-7">
     <h4 style="border-left: 3px solid #<%= @skin.name_color %>;">
@@ -16,6 +25,10 @@
           <div class="progress chart"></div>
         </div>
       <% end %>
+
+      <div class="price mt-5">
+        <span><%= number_to_currency(@skin.highest_value) %></span>
+      </div>
     </div>
   </div>
 </div>

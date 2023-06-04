@@ -59,4 +59,8 @@ class Skin < ApplicationRecord
       :sale_value
     ]
   end
+
+  def highest_value
+    csmoney_price > steam_price ? csmoney_price : steam_price
+  end
 end
