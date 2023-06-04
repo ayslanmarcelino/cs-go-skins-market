@@ -36,7 +36,10 @@ module Skins
         new_skin.has_sticker = new_skin.sticker_name.present? || new_skin.sticker_image.present?
         new_skin.expiration_date = expiration_date(class_id: skin['classid'])
 
-        new_skin.save
+        ActiveRecord::Base.transaction do
+          new_skin.save
+          Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
+        end
       end
     end
 
