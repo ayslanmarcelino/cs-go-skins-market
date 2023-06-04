@@ -54,4 +54,19 @@ module ApplicationHelper
 
     User::Role::ADMIN_KINDS.include?(current_role_kind)
   end
+
+  def tradelock_time(skin)
+    return if skin.expiration_date < Date.current
+
+    days_left = (skin.expiration_date.to_date - Date.current).to_i
+
+    case days_left
+    when 0
+      'Hoje'
+    when 1
+      "#{days_left} dia"
+    else
+      "#{days_left} dias"
+    end
+  end
 end

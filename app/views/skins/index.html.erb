@@ -1,0 +1,85 @@
+<div class="row col-md-12">
+  <h4><%= t('skins.components.layout.resource') %></h4>
+  <div>
+    <div class="pull-right mb-2">
+      <% if can?(:search, Skin) %>
+        <%= render partial: 'skins/components/modal_search' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= sort_link(@query, :name, t('.name')) %></th>
+          <th><%= sort_link(@query, :exterior, t('.exterior')) %></th>
+          <th><%= sort_link(@query, :first_steam_price, t('.first_steam_price')) %></th>
+          <th><%= sort_link(@query, :steam_price, t('.steam_price')) %></th>
+          <th><%= sort_link(@query, :csmoney_price, t('.csmoney_price')) %></th>
+          <th><%= sort_link(@query, :sale_value, t('.sale_value')) %></th>
+          <th><%= sort_link(@query, :steam_account_nickname, t('.steam_account')) %></th>
+          <th><%= t('.status') %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @skins.each do |skin| %>
+          <tr>
+            <td>
+              <div style="border-left: 3px solid #<%= skin.name_color %>;">
+                <span style="margin-left: 1%;"><%= skin.name %></span>
+              </div>
+            </td>
+            <td><%= skin.exterior %></td>
+            <td><%= number_to_currency(skin.first_steam_price) %></td>
+            <td><%= number_to_currency(skin.steam_price) %></td>
+            <td><%= number_to_currency(skin.csmoney_price) %></td>
+            <td><%= number_to_currency(skin.sale_value) %></td>
+            <td><%= skin.steam_account.nickname %></td>
+            <td class="status">
+              <span class="<%= active?(skin.available) %>"></span>
+            </td>
+            <td>
+              <% if can?(:read, Skin) %>
+                <%= link_to(skin_path(skin), class: 'btn btn-sm') do %>
+                  <i class="bi bi-eye"></i>
+                <% end %>
+              <% end %>
+              <% if can?(:update, Skin) && skin.available? %>
+                <%= link_to(edit_skin_path(skin), class: 'btn btn-sm') do %>
+                  <i class="bi bi-pencil-square"></i>
+                <% end %>
+              <% end %>
+              <% if skin.available? && can?(:disable, Skin) %>
+                <%= link_to(disable_skin_path(skin),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('skins.components.layout.disable_confirm')}: #{skin.name}?"
+                            },
+                            class: 'btn btn-sm -success') do %>
+                  <i class="bi bi-toggle-on"></i>
+                <% end %>
+              <% end %>
+              <% if unavailable?(skin) && can?(:enable, Skin) %>
+                <%= link_to(enable_skin_path(skin),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('skins.components.layout.enable_confirm')}: #{skin.name}?"
+                            },
+                            class: 'btn btn-sm -danger') do %>
+                  <i class="bi bi-toggle-off"></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%=
+  render partial: 'layouts/components/index/footer',
+         locals: {
+           resource: @skins
+         }
+%>

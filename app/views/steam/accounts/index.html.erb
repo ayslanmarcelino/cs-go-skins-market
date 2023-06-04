@@ -48,25 +48,25 @@
                 <% end %>
               <% end %>
               <% if account.active? && can?(:disable, Steam::Account) %>
-                  <%= link_to(disable_steam_account_path(account),
-                              data: {
-                                turbo_method: :patch,
-                                turbo_confirm: "#{t('steam.accounts.components.layout.disable_confirm')}: #{account.steam_id}?"
-                              },
-                              class: 'btn btn-sm -success') do %>
-                    <i class="bi bi-toggle-on"></i>
-                  <% end %>
+                <%= link_to(disable_steam_account_path(account),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('steam.accounts.components.layout.disable_confirm')}: #{account.steam_id}?"
+                            },
+                            class: 'btn btn-sm -success') do %>
+                  <i class="bi bi-toggle-on"></i>
                 <% end %>
-                <% if disabled?(account) && can?(:enable, Steam::Account) %>
-                  <%= link_to(enable_steam_account_path(account),
-                              data: {
-                                turbo_method: :patch,
-                                turbo_confirm: "#{t('steam.accounts.components.layout.enable_confirm')}: #{account.steam_id}?"
-                              },
-                              class: 'btn btn-sm -danger') do %>
-                    <i class="bi bi-toggle-off"></i>
-                  <% end %>
+              <% end %>
+              <% if disabled?(account) && can?(:enable, Steam::Account) %>
+                <%= link_to(enable_steam_account_path(account),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('steam.accounts.components.layout.enable_confirm')}: #{account.steam_id}?"
+                            },
+                            class: 'btn btn-sm -danger') do %>
+                  <i class="bi bi-toggle-off"></i>
                 <% end %>
+              <% end %>
             </td>
           </tr>
         <% end %>

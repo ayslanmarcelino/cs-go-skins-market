@@ -31,3 +31,15 @@
     </div>
   <% end %>
 <% end %>
+
+<% if can?(:read, Skin) %>
+  <%= link_to(skins_path, class: "#{'active-menu' if request.path.include?(skins_path)} list-item-menu list-group-item-action",
+                          id: 'skin') do %>
+    <div class="menu">
+      <div class="icon">
+        <i class="bi bi-steam"></i>
+      </div>
+      <span><%= t('skins.components.layout.resource') %></span>
+    </div>
+  <% end %>
+<% end %>

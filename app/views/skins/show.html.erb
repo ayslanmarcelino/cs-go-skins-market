@@ -1,0 +1,67 @@
+<div class="d-inline-flex p-5 row col-md-12">
+  <div class="col-md-5">
+    <%= image_tag(@skin.image, width: '100%') %>
+    <%= link_to(@skin.inspect_url, class: 'btn btn-sm -transparent-standard w-100 mt-2') do %>
+      <i class="bi bi-steam"></i>
+      <%= t('application.inspect') %>
+    <% end %>
+    <% if @skin.has_sticker? %>
+      <div class="stickers d-inline-flex mt-2">
+        <% @skin.sticker_image.each_with_index do |sticker, index| %>
+          <div title="<%= @skin.sticker_name.split(', ')[index] %>">
+            <%= image_tag(sticker, width: '100%') %>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-7">
+    <% if @skin.expiration_date.present? && (@skin.expiration_date > Time.current) %>
+      <span>
+        <i class="bi bi-lock"></i>
+        <%= tradelock_time(@skin) %>
+      </span>
+    <% end %>
+    <h4 class="mt-2" style="border-left: 3px solid #<%= @skin.name_color %>;">
+      <span style="margin-left: 2%;"><%= @skin.name %></span>
+    </h4>
+    <div>
+      <%= @skin.exterior %>
+    </div>
+    <div class="skin">
+      <% if @skin.float&.positive? %>
+        <div class="float">
+          <i class="bi bi-caret-down-fill" style="margin-left: <%= @skin.float * 100 %>%; font-size: 10px;"></i>
+          <div class="progress"></div>
+          <div class="numeric"><%= @skin.float %></div>
+        </div>
+      <% end %>
+
+      <div class="price mt-5">
+        <span><%= number_to_currency(@skin.highest_value) %></span>
+      </div>
+    </div>
+  </div>
+</div>
+<h4 class="mt-3"><%= t('skins.components.layout.logs') %></h4>
+<div class="row">
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= t('.steam_price') %></th>
+          <th><%= t('.created_at') %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @skin.logs.each do |log| %>
+          <tr>
+            <td><%= number_to_currency(log.steam_price) %></td>
+            <td><%= l(log.created_at) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

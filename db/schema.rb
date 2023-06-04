@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_141152) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,44 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
     t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
   end
 
+  create_table "skin_logs", force: :cascade do |t|
+    t.float "steam_price"
+    t.bigint "skin_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["skin_id"], name: "index_skin_logs_on_skin_id"
+  end
+
+  create_table "skins", force: :cascade do |t|
+    t.bigint "steam_id"
+    t.string "name"
+    t.string "market_name"
+    t.string "name_color"
+    t.string "exterior"
+    t.string "image"
+    t.string "inspect_url"
+    t.string "name_tag"
+    t.string "kind"
+    t.string "gun_kind"
+    t.float "float"
+    t.float "steam_price", default: 0.0
+    t.float "first_steam_price", default: 0.0
+    t.float "csmoney_price", default: 0.0
+    t.float "amount_paid", default: 0.0
+    t.float "sale_value", default: 0.0
+    t.boolean "stattrak", default: false
+    t.boolean "has_sticker", default: false
+    t.boolean "available", default: true
+    t.boolean "has_name_tag", default: false
+    t.string "sticker_name", default: "{}"
+    t.string "sticker_image", default: [], array: true
+    t.datetime "expiration_date"
+    t.bigint "steam_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["steam_account_id"], name: "index_skins_on_steam_account_id"
+  end
+
   create_table "steam_accounts", force: :cascade do |t|
     t.string "steam_id"
     t.string "steam_custom_id"
@@ -151,6 +189,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_02_171554) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
+  add_foreign_key "skin_logs", "skins"
+  add_foreign_key "skins", "steam_accounts"
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
   add_foreign_key "user_roles", "enterprises"

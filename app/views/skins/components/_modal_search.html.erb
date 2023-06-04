@@ -1,0 +1,26 @@
+<button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#modalSearchSkins">
+  <i class="bi bi-search"></i>
+  <%= t('application.search') %>
+</button>
+
+<div class="modal fade" id="modalSearchSkins" tabindex="-1" role="dialog" aria-labelledby="modalSearchSkinsLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= form_with(url: search_skins_path, method: :post) do |form| %>
+          <%= form.collection_select(:steam_account_id, @steam_accounts, :id, :formatted_name, { include_blank: t('application.select') }, { class: 'form-control', required: true }) %>
+          <div class="pull-right mt-2">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">
+              <i class="bi bi-x-lg"></i>
+              <%= t('application.cancel') %>
+            </a>
+            <%= button_tag('submit', class: 'btn btn-dark') do %>
+              <i class="bi bi-search"></i>
+              <%= t('application.search') %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

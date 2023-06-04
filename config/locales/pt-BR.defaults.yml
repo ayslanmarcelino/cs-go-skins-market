@@ -1,4 +1,12 @@
 pt-BR:
+  number:
+    currency:
+      format:
+        unit: 'R$'
+        format: '%u %n'
+        separator: ','
+        delimiter: '.'
+        precision: 2
   date:
     formats:
       long: ! '%d/%m/%Y'
@@ -22,5 +30,6 @@ pt-BR:
       - :year
   time:
     formats:
+      default: ! '%d/%m/%Y às %H:%M'
       long: ! '%d/%m/%Y - %H:%M:%S'
       chart: ! '%m/%Y'

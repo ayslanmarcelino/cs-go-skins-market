@@ -1,0 +1,9 @@
+pt-BR:
+  skins:
+    components:
+      layout:
+        resource: Skins
+        show: Você está visualizando a skin
+        enable_confirm: Você deseja marcar como DISPONÍVEL a skin
+        disable_confirm: Você deseja marcar como INDISPONÍVEL a skin
+        logs: Histórico
