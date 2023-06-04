@@ -18,7 +18,7 @@ module Steam
           end
 
           def image
-            @skin['icon_url_large'].present? ? @skin['icon_url_large'] : @skin['icon_url']
+            @skin['icon_url_large'].presence || @skin['icon_url']
           end
         end
       end

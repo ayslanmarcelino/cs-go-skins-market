@@ -16,7 +16,7 @@ module Steam
           def find
             return if name_tag.blank?
 
-            name_tag.first.partition('Etiqueta de Nome: ').last.gsub(/[\\\"]/, '')
+            name_tag.first.partition('Etiqueta de Nome: ').last.gsub(/[\\"]/, '')
           end
 
           def name_tag

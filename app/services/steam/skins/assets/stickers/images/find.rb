@@ -19,7 +19,7 @@ module Steam
 
               @skin['descriptions'].each do |description|
                 if description['value'].include?('sticker_info')
-                  return description['value'].scan(/https?:\/\/[\S]+?png/)
+                  return description['value'].scan(%r{https?://\S+?png})
                 end
               end
 

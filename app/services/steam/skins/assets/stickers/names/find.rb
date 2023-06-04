@@ -19,9 +19,9 @@ module Steam
 
               @skin['descriptions'].each do |description|
                 if description['value'].include?('sticker_info') && description['value'].include?('Adesivo')
-                  return description['value'].match(/Adesivo: (.*?)<\/center>/)[1]
+                  return description['value'].match(%r{Adesivo: (.*?)</center>})[1]
                 elsif description['value'].include?('sticker_info') && description['value'].include?('Emblema')
-                  return description['value'].match(/Emblema: (.*?)<\/center>/)[1]
+                  return description['value'].match(%r{Emblema: (.*?)</center>})[1]
                 end
               end
 

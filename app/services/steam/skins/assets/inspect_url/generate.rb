@@ -34,12 +34,10 @@ module Steam
           end
 
           def base_url
-            @url ||= 'steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S'
+            @base_url ||= 'steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S'
           end
         end
       end
     end
   end
 end
-
-# steam://rungame/730/76561202255233023/+csgo_econ_action_preview%20S76561198345749032A30665714007D10272229733627967232

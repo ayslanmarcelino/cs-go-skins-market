@@ -47,6 +47,5 @@ class Skin < ApplicationRecord
     'Ferramenta (Nível Básico)'
   ].freeze
 
-  def self.permitted_params
-  end
+  def self.permitted_params; end
 end
