@@ -1,18 +1,10 @@
 <div class="row col-md-12">
   <h4><%= t('skins.components.layout.resource') %></h4>
-  <%= form_with url: search_skins_path, method: :post do |form| %>
-    <%= form.collection_select(:steam_account_id, Steam::Account.all, :id, :steam_custom_id, {include_blank: t('.select_account')}, { class: 'form-control', required: true }) %>
-    <div class="modal-footer">
-      <a class="btn btn-secondary text-white" data-dismiss="modal">
-        <i class="fas fa-close"></i>
-        <%= t('.cancel') %>
-      </a>
-      <%= button_tag(type: 'submit', class: 'btn btn-dark', data: { disable_with: 'Buscando novas skins...' }) do %>
-        <i class="fas fa-search"></i>
-        <%= t('.search') %>
-      <% end %>
+  <div>
+    <div class="pull-right mb-2">
+      <%= render partial: 'skins/components/modal_search' %>
     </div>
-  <% end %>
+  </div>
   <div class="table-wrap">
     <table class="table table-responsive">
       <thead>
