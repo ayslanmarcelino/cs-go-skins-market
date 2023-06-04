@@ -43,5 +43,10 @@ Rails.application.routes.draw do
     collection do
       post 'search'
     end
+
+    member do
+      patch :disable
+      patch :enable
+    end
   end
 end

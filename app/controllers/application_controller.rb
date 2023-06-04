@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :active_enterprise?
   before_action :active_user?
 
-  helper_method :disabled?
+  helper_method :disabled?, :unavailable?
 
   rescue_from CanCan::AccessDenied, with: :access_denied
 
@@ -42,5 +42,17 @@ class ApplicationController < ActionController::Base
 
   def disabled?(resource)
     !resource.active?
+  end
+
+  def unavailable?(resource)
+    !resource.available?
+  end
+
+  def make_available!(resource)
+    resource.update!(available: true)
+  end
+
+  def make_unavailable!(resource)
+    resource.update!(available: false)
   end
 end

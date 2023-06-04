@@ -4,5 +4,5 @@ pt-BR:
       layout:
         resource: Skins
         show: Você está visualizando a skin
-        enable_confirm: Você deseja ATIVAR a skin
-        disable_confirm: Você deseja DESATIVAR a skin
+        enable_confirm: Você deseja marcar como DISPONÍVEL a skin
+        disable_confirm: Você deseja marcar como INDISPONÍVEL a skin

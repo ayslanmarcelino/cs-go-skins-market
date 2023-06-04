@@ -39,6 +39,28 @@
             <td class="status">
               <span class="<%= active?(skin.available) %>"></span>
             </td>
+            <td>
+              <% if skin.available? && can?(:disable, Skin) %>
+                <%= link_to(disable_skin_path(skin),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('skins.components.layout.disable_confirm')}: #{skin.name}?"
+                            },
+                            class: 'btn btn-sm -success') do %>
+                  <i class="bi bi-toggle-on"></i>
+                <% end %>
+              <% end %>
+              <% if unavailable?(skin) && can?(:enable, Skin) %>
+                <%= link_to(enable_skin_path(skin),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('skins.components.layout.enable_confirm')}: #{skin.name}?"
+                            },
+                            class: 'btn btn-sm -danger') do %>
+                  <i class="bi bi-toggle-off"></i>
+                <% end %>
+              <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>
