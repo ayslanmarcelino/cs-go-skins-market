@@ -40,7 +40,7 @@
               <span class="<%= active?(skin.available) %>"></span>
             </td>
             <td>
-              <% if can?(:update, Skin) %>
+              <% if can?(:update, Skin) && skin.available? %>
                 <%= link_to(edit_skin_path(skin), class: 'btn btn-sm') do %>
                   <i class="bi bi-pencil-square"></i>
                 <% end %>
