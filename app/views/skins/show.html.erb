@@ -16,7 +16,13 @@
     <% end %>
   </div>
   <div class="col-md-7">
-    <h4 style="border-left: 3px solid #<%= @skin.name_color %>;">
+    <% if @skin.expiration_date > Time.current %>
+      <span>
+        <i class="bi bi-lock"></i>
+        <%= tradelock_time(@skin) %>
+      </span>
+    <% end %>
+    <h4 class="mt-2" style="border-left: 3px solid #<%= @skin.name_color %>;">
       <span style="margin-left: 2%;"><%= @skin.name %></span>
     </h4>
     <div>
