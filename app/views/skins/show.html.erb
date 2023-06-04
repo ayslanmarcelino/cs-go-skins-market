@@ -1,8 +1,12 @@
 <div class="d-inline-flex p-5 row col-md-12">
   <div class="col-md-5">
     <%= image_tag(@skin.image, width: '100%') %>
+    <%= link_to(@skin.inspect_url, class: 'btn btn-sm -transparent-standard w-100 mt-2') do %>
+      <i class="bi bi-steam"></i>
+      <%= t('application.inspect') %>
+    <% end %>
     <% if @skin.has_sticker? %>
-      <div class="stickers d-inline-flex align-items-center">
+      <div class="stickers d-inline-flex mt-2">
         <% @skin.sticker_image.each_with_index do |sticker, index| %>
           <div title="<%= @skin.sticker_name.split(', ')[index] %>">
             <%= image_tag(sticker, width: '100%') %>
