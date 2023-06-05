@@ -1,0 +1,33 @@
+<div class="row col-md-12">
+  <h4><%= t('transactions.components.layout.resource') %></h4>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= sort_link(@query, :value, t('.value')) %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= number_to_currency(transaction.value) %></td>
+            <td>
+              <% if can?(:update, Transaction) %>
+                <%#= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
+                  <i class="bi bi-pencil-square"></i>
+                <%# end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%=
+  render partial: 'layouts/components/index/footer',
+         locals: {
+           resource: @transactions
+         }
+%>
