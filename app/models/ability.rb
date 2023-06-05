@@ -58,7 +58,7 @@ class Ability
       can([:read, :search], Skin, steam_account: @user.accounts)
       can(:enable, Skin, steam_account: @user.accounts, available: false)
       can([:update, :disable], Skin, steam_account: @user.accounts, available: true)
-      can(:read, Transaction)
+      can(:read, Transaction, owner: @user)
     end
 
     def viewer_abilities
