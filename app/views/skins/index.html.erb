@@ -60,7 +60,7 @@
                   <i class="bi bi-toggle-on"></i>
                 <% end %>
               <% end %>
-              <% if unavailable?(skin) && can?(:enable, Skin) %>
+              <% if unavailable?(skin) && can?(:enable, Skin) && skin.transaction_id.blank? %>
                 <%= link_to(enable_skin_path(skin),
                             data: {
                               turbo_method: :patch,
