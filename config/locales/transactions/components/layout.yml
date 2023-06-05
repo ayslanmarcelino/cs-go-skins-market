@@ -1,0 +1,7 @@
+pt-BR:
+  transactions:
+    components:
+      layout:
+        resource: Transações
+        show: Você está visualizando a transação
+        delete_confirm: Você deseja excluir a transação

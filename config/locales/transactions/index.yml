@@ -1,0 +1,5 @@
+pt-BR:
+  transactions:
+    index:
+      value: Valor
+      status: Status
