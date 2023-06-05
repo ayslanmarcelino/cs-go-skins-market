@@ -3,7 +3,7 @@
 # Table name: transactions
 #
 #  id                  :bigint           not null, primary key
-#  aasm_state          :string
+#  aasm_state          :string           default("pending")
 #  value               :float
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -30,6 +30,7 @@ RSpec.describe Transaction, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:value) }
+    it { is_expected.to validate_presence_of(:aasm_state) }
     it { is_expected.to validate_presence_of(:owner) }
     it { is_expected.to validate_presence_of(:transaction_type) }
   end
