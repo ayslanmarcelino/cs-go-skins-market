@@ -50,5 +50,5 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions, only: [:index]
+  resources :transactions, only: [:index, :new, :create]
 end

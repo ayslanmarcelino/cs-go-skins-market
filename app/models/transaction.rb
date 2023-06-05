@@ -40,6 +40,13 @@ class Transaction < ApplicationRecord
   has_many :skins
   has_many :kind, class_name: 'Transaction::Type'
 
+  def self.permitted_params
+    [
+      :id,
+      :value
+    ]
+  end
+
   def amount_paid
     skins.sum(&:amount_paid)
   end
