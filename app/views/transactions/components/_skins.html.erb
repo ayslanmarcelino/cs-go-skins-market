@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-sm -transparent-standard" data-toggle="modal" data-target="#skinsModal-<%= transaction.id %>">
+<button type="button" class="btn btn-sm -transparent-standard <%= "disabled" if transaction.skins.blank? %>" data-toggle="modal" data-target="#skinsModal-<%= transaction.id %>">
   <%= t('application.view') %>
 </button>
 <div class="modal fade" id="skinsModal-<%= transaction.id %>" tabindex="-1" role="dialog" aria-labelledby="skinsModalLabel" aria-hidden="true">

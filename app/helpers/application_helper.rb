@@ -50,7 +50,7 @@ module ApplicationHelper
     query = Transaction.where(owner: current_user)
 
     query.each do |transaction|
-      transactions << ["#{transaction.transaction_type.description} ##{transaction.transaction_type.counter} | #{number_to_currency(transaction.value)}", transaction.id]
+      transactions << ["#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}", transaction.id]
     end
 
     transactions.sort
@@ -88,5 +88,16 @@ module ApplicationHelper
     }
 
     status_map[status.to_sym] || ''
+  end
+
+  def transaction_types_collection
+    transaction_types = []
+    query = Transaction::Type.where(enterprise: current_user.current_enterprise)
+
+    query.each do |transaction_type|
+      transaction_types << ["#{transaction_type.description}", transaction_type.id]
+    end
+
+    transaction_types.sort
   end
 end

@@ -22,4 +22,9 @@ class Transaction::Type < ApplicationRecord
 
   validates :description, presence: true
   validates :description, uniqueness: { scope: :enterprise_id }
+
+  def increment!
+    self.counter += 1
+    save
+  end
 end

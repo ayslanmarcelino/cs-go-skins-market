@@ -32,7 +32,7 @@ class Transaction < ApplicationRecord
   belongs_to :transaction_type, class_name: 'Transaction::Type'
   belongs_to :owner, class_name: 'User'
 
-  validates :value, :aasm_state, :identifier, :transaction_type, :owner, presence: true
+  validates :value, :aasm_state, presence: true
   validates :identifier, uniqueness: { scope: [:transaction_type, :owner] }
 
   as_enum :state, STATES, map: :string, source: :aasm_state
@@ -43,7 +43,8 @@ class Transaction < ApplicationRecord
   def self.permitted_params
     [
       :id,
-      :value
+      :value,
+      :transaction_type_id
     ]
   end
 
