@@ -49,4 +49,6 @@ Rails.application.routes.draw do
       patch :enable
     end
   end
+
+  resources :transactions, only: [:index]
 end
