@@ -1,13 +1,17 @@
 <div class="row">
-  <div class="col-lg-4">
+  <div class="col-lg-6">
     <%= form.label(:float) %>
     <%= form.text_field(:float, class: 'form-control') %>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-2">
     <%= form.label(:csmoney_price) %>
     <%= form.text_field(:csmoney_price, class: 'form-control') %>
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-2">
+    <%= form.label(:amount_paid) %>
+    <%= form.text_field(:amount_paid, class: 'form-control') %>
+  </div>
+  <div class="col-lg-2">
     <%= form.label(:sale_value) %>
     <%= form.text_field(:sale_value, class: 'form-control') %>
   </div>

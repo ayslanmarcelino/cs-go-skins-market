@@ -61,6 +61,7 @@ class Skin < ApplicationRecord
       :float,
       :csmoney_price,
       :sale_value,
+      :amount_paid,
       :transaction_id
     ]
   end
