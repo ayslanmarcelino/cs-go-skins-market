@@ -97,3 +97,5 @@ pt-BR:
         float: Float
         csmoney_price: Preço CS.Money
         sale_value: Preço de venda
+      transaction/type:
+        description: Descrição
