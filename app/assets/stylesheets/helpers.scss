@@ -1,3 +1,13 @@
+.badge {
+  &.-success {
+    background-color: $success;
+  }
+
+  &.-primary {
+    background-color: $primary;
+  }
+}
+
 .btn {
   &.-standard {
     background-color: $grey;

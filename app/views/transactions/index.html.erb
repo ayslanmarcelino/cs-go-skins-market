@@ -4,14 +4,26 @@
     <table class="table table-responsive">
       <thead>
         <tr>
+          <th><%= sort_link(@query, :status, t('.status')) %></th>
           <th><%= sort_link(@query, :value, t('.value')) %></th>
+          <th><%= sort_link(@query, :transaction_type_description, t('.description')) %></th>
+          <th><%= sort_link(@query, :skins, t('.skins')) %></th>
+          <th><%= sort_link(@query, :created_at, t('.created_at')) %></th>
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <% @transactions.each do |transaction| %>
           <tr>
+            <td>
+              <span class="badge -<%= status_class(transaction.state) %> w-100">
+                <%= I18n.t("activerecord.attributes.transaction.aasm_state_list.#{transaction.state}") %>
+              </span>
+            </td>
             <td><%= number_to_currency(transaction.value) %></td>
+            <td><%= transaction.transaction_type.description %> #<%= transaction.identifier %></td>
+            <td><%= transaction.skins.map(&:id) %></td>
+            <td><%= l(transaction.created_at) %></td>
             <td>
               <% if can?(:update, Transaction) %>
                 <%#= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>

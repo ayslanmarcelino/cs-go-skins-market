@@ -80,4 +80,13 @@ module ApplicationHelper
       "#{days_left} dias"
     end
   end
+
+  def status_class(status)
+    status_map = {
+      pending: 'primary',
+      finished: 'success'
+    }
+
+    status_map[status.to_sym] || ''
+  end
 end
