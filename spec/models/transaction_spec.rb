@@ -3,6 +3,7 @@
 # Table name: transactions
 #
 #  id                  :bigint           not null, primary key
+#  aasm_state          :string
 #  value               :float
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null

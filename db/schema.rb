@@ -162,6 +162,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
 
   create_table "transactions", force: :cascade do |t|
     t.float "value"
+    t.string "aasm_state"
     t.bigint "owner_id"
     t.bigint "transaction_type_id"
     t.datetime "created_at", null: false
