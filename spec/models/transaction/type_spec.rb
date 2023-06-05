@@ -17,9 +17,15 @@
 #
 #  fk_rails_...  (enterprise_id => enterprises.id)
 #
-class Transaction::Type < ApplicationRecord
-  belongs_to :enterprise
+require 'rails_helper'
 
-  validates :description, presence: true
-  validates :description, uniqueness: { scope: :enterprise_id }
+RSpec.describe Transaction::Type, type: :model do
+  describe 'associations' do
+    it { is_expected.to belong_to(:enterprise) }
+  end
+
+  describe 'validations' do
+    it { is_expected.to validate_presence_of(:description) }
+    it { is_expected.to validate_uniqueness_of(:description).scoped_to(:enterprise_id) }
+  end
 end
