@@ -47,7 +47,7 @@ module ApplicationHelper
 
   def transactions_collection
     transactions = []
-    query = Transaction.where(owner: current_user)
+    query = Transaction.where(owner: current_user).pendings
 
     query.each do |transaction|
       data = "#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}"

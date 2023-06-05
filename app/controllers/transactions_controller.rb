@@ -46,7 +46,7 @@ class TransactionsController < ApplicationController
 
   def finish
     if @transaction.may_finish?
-      @transaction.finish!
+      @transaction.finish!(@transaction)
       flash[:success] = 'Transação finalizada com sucesso.'
     elsif @order.finished?
       flash[:alert] = 'Transação já foi finalizada.'
