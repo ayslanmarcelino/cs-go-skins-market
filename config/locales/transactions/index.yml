@@ -4,5 +4,7 @@ pt-BR:
       value: Valor
       status: Status
       description: Descrição
+      investiment: Investimento
+      profit: Lucro
       skins: Skins
       created_at: Criado em

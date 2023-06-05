@@ -9,6 +9,7 @@ pt-BR:
     filter: Filtrar
     clear: Limpar
     search: Buscar
+    view: Visualizar
     only_active: Apenas ativos
     only_disabled: Apenas desativados
     new: Novo
