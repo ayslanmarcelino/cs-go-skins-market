@@ -4,6 +4,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  aasm_state          :string           default("pending")
+#  identifier          :integer
 #  value               :float
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
@@ -31,9 +32,11 @@ class Transaction < ApplicationRecord
   belongs_to :transaction_type, class_name: 'Transaction::Type'
   belongs_to :owner, class_name: 'User'
 
-  validates :value, :aasm_state, :transaction_type, :owner, presence: true
+  validates :value, :aasm_state, :identifier, :transaction_type, :owner, presence: true
+  validates :identifier, uniqueness: { scope: [:transaction_type, :owner] }
 
   as_enum :state, STATES, map: :string, source: :aasm_state
 
   has_many :skins
+  has_many :kind, class_name: 'Transaction::Type'
 end
