@@ -46,7 +46,7 @@
 
 <% if can?(:read, Transaction) %>
   <%= link_to(transactions_path, class: "#{'active-menu' if request.path.include?(transactions_path)} list-item-menu list-group-item-action",
-                          id: 'transaction') do %>
+                                 id: 'transaction') do %>
     <div class="menu">
       <div class="icon">
         <i class="bi bi-arrow-left-right"></i>
