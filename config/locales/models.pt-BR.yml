@@ -100,3 +100,8 @@ pt-BR:
         transaction: Transação
       transaction/type:
         description: Descrição
+      transaction:
+        identifier: Identificador
+        aasm_state_list:
+          pending: Pendente
+          finished: Finalizado

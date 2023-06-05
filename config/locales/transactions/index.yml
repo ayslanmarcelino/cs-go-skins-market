@@ -3,3 +3,6 @@ pt-BR:
     index:
       value: Valor
       status: Status
+      description: Descrição
+      skins: Skins
+      created_at: Criado em
