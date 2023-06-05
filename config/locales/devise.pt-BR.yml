@@ -42,6 +42,8 @@ pt-BR:
       client: Cliente
       comment: Comentário
       steam/account: Conta Steam
+      skin: Skin
+      transaction: Transação
   devise:
     confirmations:
       confirmed: A sua conta foi confirmada com sucesso.

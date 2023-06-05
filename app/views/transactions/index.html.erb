@@ -45,7 +45,7 @@
             <td><%= number_to_currency(transaction.profit) %></td>
             <td><%= l(transaction.created_at) %></td>
             <td>
-              <% if can?(:update, Transaction) %>
+              <% if can?(:update, Transaction) && transaction.pending? %>
                 <%= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
                   <i class="bi bi-pencil-square"></i>
                 <% end %>
