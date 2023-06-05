@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_222047) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_011547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -158,6 +158,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_222047) do
     t.index ["enterprise_id"], name: "index_transaction_types_on_enterprise_id"
   end
 
+  create_table "transactions", force: :cascade do |t|
+    t.float "value"
+    t.bigint "owner_id"
+    t.bigint "transaction_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_transactions_on_owner_id"
+    t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
+  end
+
   create_table "user_roles", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "enterprise_id"
@@ -203,6 +213,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_222047) do
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
   add_foreign_key "transaction_types", "enterprises"
+  add_foreign_key "transactions", "transaction_types"
+  add_foreign_key "transactions", "users", column: "owner_id"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
   add_foreign_key "user_roles", "users", column: "created_by_id"
