@@ -24,4 +24,6 @@ class Transaction < ApplicationRecord
   belongs_to :owner, class_name: 'User'
 
   validates :value, :transaction_type, :owner, presence: true
+
+  has_many :skins
 end

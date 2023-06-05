@@ -11,4 +11,8 @@
     <%= form.label(:sale_value) %>
     <%= form.text_field(:sale_value, class: 'form-control') %>
   </div>
+  <div class="col-lg-12">
+    <%= form.label(:transaction) %>
+    <%= form.select :transaction_id, transactions_collection, { include_blank: 'Selecione a transação' }, { class: 'form-control required', required: true } %>
+  </div>
 </div>

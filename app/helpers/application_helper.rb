@@ -45,6 +45,17 @@ module ApplicationHelper
     users.sort
   end
 
+  def transactions_collection
+    transactions = []
+    query = Transaction.where(owner: current_user)
+
+    query.each do |transaction|
+      transactions << ["#{transaction.transaction_type.description} ##{transaction.transaction_type.counter} | #{number_to_currency(transaction.value)}", transaction.id]
+    end
+
+    transactions.sort
+  end
+
   def current_role_kind
     current_user.roles.find_by(enterprise: current_user.current_enterprise)&.kind
   end

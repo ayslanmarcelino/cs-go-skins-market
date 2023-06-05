@@ -49,6 +49,7 @@ class Skin < ApplicationRecord
   ].freeze
 
   belongs_to :steam_account, class_name: 'Steam::Account'
+  belongs_to :deal, class_name: 'Transaction', optional: true
 
   validates :steam_id, uniqueness: { scope: [:steam_account_id] }
 
@@ -59,7 +60,8 @@ class Skin < ApplicationRecord
       :id,
       :float,
       :csmoney_price,
-      :sale_value
+      :sale_value,
+      :transaction_id
     ]
   end
 
