@@ -46,9 +46,9 @@
             <td><%= l(transaction.created_at) %></td>
             <td>
               <% if can?(:update, Transaction) %>
-                <%#= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
+                <%= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
                   <i class="bi bi-pencil-square"></i>
-                <%# end %>
+                <% end %>
               <% end %>
             </td>
           </tr>

@@ -50,7 +50,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions, only: [:index, :new, :create]
+  resources :transactions, only: [:index, :new, :create, :edit, :update]
 
   namespace :transaction do
     resources :types, only: [:new, :create]
