@@ -50,7 +50,9 @@ module ApplicationHelper
     query = Transaction.where(owner: current_user)
 
     query.each do |transaction|
-      transactions << ["#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}", transaction.id]
+      data = "#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}"
+
+      transactions << [data, transaction.id]
     end
 
     transactions.reverse
@@ -95,7 +97,7 @@ module ApplicationHelper
     query = Transaction::Type.where(enterprise: current_user.current_enterprise)
 
     query.each do |transaction_type|
-      transaction_types << ["#{transaction_type.description}", transaction_type.id]
+      transaction_types << [transaction_type.description.to_s, transaction_type.id]
     end
 
     transaction_types.sort
