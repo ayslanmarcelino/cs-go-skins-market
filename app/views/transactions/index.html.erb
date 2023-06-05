@@ -27,6 +27,7 @@
           <th><%= t('.investiment') %></th>
           <th><%= t('.profit') %></th>
           <th><%= sort_link(@query, :created_at, t('.created_at')) %></th>
+          <th><%= sort_link(@query, :updated_at, t('.updated_at')) %></th>
           <th>&nbsp;</th>
         </tr>
       </thead>
@@ -44,6 +45,7 @@
             <td><%= number_to_currency(transaction.amount_paid) %></td>
             <td><%= number_to_currency(transaction.profit) %></td>
             <td><%= l(transaction.created_at) %></td>
+            <td><%= l(transaction.updated_at) %></td>
             <td>
               <% if can?(:update, Transaction) && transaction.pending? %>
                 <%= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
