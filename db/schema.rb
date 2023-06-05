@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_011547) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,7 +128,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_011547) do
     t.bigint "steam_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "transaction_id"
     t.index ["steam_account_id"], name: "index_skins_on_steam_account_id"
+    t.index ["transaction_id"], name: "index_skins_on_transaction_id"
   end
 
   create_table "steam_accounts", force: :cascade do |t|
@@ -210,6 +212,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_011547) do
   add_foreign_key "people", "enterprises"
   add_foreign_key "skin_logs", "skins"
   add_foreign_key "skins", "steam_accounts"
+  add_foreign_key "skins", "transactions"
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
   add_foreign_key "transaction_types", "enterprises"

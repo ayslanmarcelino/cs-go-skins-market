@@ -29,14 +29,17 @@
 #  updated_at        :datetime         not null
 #  steam_account_id  :bigint
 #  steam_id          :bigint
+#  transaction_id    :bigint
 #
 # Indexes
 #
 #  index_skins_on_steam_account_id  (steam_account_id)
+#  index_skins_on_transaction_id    (transaction_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (steam_account_id => steam_accounts.id)
+#  fk_rails_...  (transaction_id => transactions.id)
 #
 class Skin < ApplicationRecord
   REJECT_TYPES = [
