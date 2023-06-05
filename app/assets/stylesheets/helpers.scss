@@ -3,6 +3,10 @@
     background-color: $success;
   }
 
+  &.-danger {
+    background-color: $dark-red;
+  }
+
   &.-primary {
     background-color: $primary;
   }

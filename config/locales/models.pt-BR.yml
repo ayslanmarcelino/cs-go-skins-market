@@ -107,4 +107,5 @@ pt-BR:
         transaction_type: Tipo de transação
         aasm_state_list:
           pending: Pendente
+          canceled: Cancelado
           finished: Finalizado

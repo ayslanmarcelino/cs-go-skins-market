@@ -26,6 +26,7 @@ class Transaction < ApplicationRecord
 
   STATES = [
     :pending,
+    :canceled,
     :finished
   ].freeze
 

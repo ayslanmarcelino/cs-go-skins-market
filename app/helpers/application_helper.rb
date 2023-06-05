@@ -86,6 +86,7 @@ module ApplicationHelper
   def status_class(status)
     status_map = {
       pending: 'primary',
+      canceled: 'danger',
       finished: 'success'
     }
 

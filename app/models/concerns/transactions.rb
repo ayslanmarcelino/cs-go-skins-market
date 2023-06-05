@@ -6,7 +6,12 @@ module Transactions
 
     aasm do
       state :pending, initial: true
+      state :canceled
       state :finished
+
+      event :cancel do
+        transitions from: :pending, to: :canceled
+      end
 
       event :finish, if: :has_skin? do
         transitions from: :pending, to: :finished
