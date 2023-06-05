@@ -103,6 +103,7 @@ pt-BR:
         description: Descrição
       transaction:
         identifier: Identificador
+        value: Valor
         aasm_state_list:
           pending: Pendente
           finished: Finalizado
