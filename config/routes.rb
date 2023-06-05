@@ -50,7 +50,12 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :transactions, only: [:index, :new, :create, :edit, :update]
+  resources :transactions, only: [:index, :new, :create, :edit, :update] do
+    member do
+      patch :cancel
+      patch :finish
+    end
+  end
 
   namespace :transaction do
     resources :types, only: [:new, :create]

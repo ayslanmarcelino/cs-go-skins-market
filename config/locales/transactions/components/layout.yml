@@ -5,3 +5,5 @@ pt-BR:
         resource: Transações
         show: Você está visualizando a transação
         delete_confirm: Você deseja excluir a transação
+        cancel_confirm: Você deseja marcar como CANCELADO a transação
+        finish_confirm: Você deseja marcar como FINALIZADO a transação

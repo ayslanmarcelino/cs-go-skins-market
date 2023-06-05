@@ -61,7 +61,7 @@ class Ability
       can(:create, Transaction::Type)
       can(:read, Transaction, owner: @user)
       can(:create, Transaction)
-      can(:update, Transaction, owner: @user, aasm_state: 'pending')
+      can([:update, :cancel, :finish], Transaction, owner: @user, aasm_state: 'pending')
     end
 
     def viewer_abilities

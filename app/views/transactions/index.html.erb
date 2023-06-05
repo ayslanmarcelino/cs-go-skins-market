@@ -50,6 +50,26 @@
                   <i class="bi bi-pencil-square"></i>
                 <% end %>
               <% end %>
+              <% if can?(:cancel, Transaction) && transaction.pending? %>
+                <%= link_to(cancel_transaction_path(transaction),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('transactions.components.layout.cancel_confirm')}: #{transaction.transaction_type.description} ##{transaction.identifier}?"
+                            },
+                            class: 'btn btn-sm -transparent-danger') do %>
+                  <i class="bi bi-hand-thumbs-down"></i>
+                <% end %>
+              <% end %>
+              <% if can?(:finish, Transaction) && transaction.pending? %>
+                <%= link_to(finish_transaction_path(transaction),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('transactions.components.layout.finish_confirm')}: #{transaction.transaction_type.description} ##{transaction.identifier}?"
+                            },
+                            class: 'btn btn-sm -transparent-success') do %>
+                  <i class="bi bi-hand-thumbs-up"></i>
+                <% end %>
+              <% end %>
             </td>
           </tr>
         <% end %>

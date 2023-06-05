@@ -31,6 +31,32 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def cancel
+    if @transaction.may_cancel?
+      @transaction.cancel!
+      flash[:success] = 'Transação cancelada com sucesso.'
+    elsif @transaction.canceled?
+      flash[:alert] = 'Transação já cancelada.'
+    else
+      flash[:alert] = 'Transação não pode ser cancelada.'
+    end
+
+    redirect_to(transactions_path)
+  end
+
+  def finish
+    if @transaction.may_finish?
+      @transaction.finish!
+      flash[:success] = 'Transação finalizada com sucesso.'
+    elsif @order.finished?
+      flash[:alert] = 'Transação já foi finalizada.'
+    else
+      flash[:alert] = 'Transação não pode ser finalizada.'
+    end
+
+    redirect_to(transactions_path)
+  end
+
   private
 
   def transaction_params
