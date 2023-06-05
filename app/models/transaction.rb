@@ -39,4 +39,12 @@ class Transaction < ApplicationRecord
 
   has_many :skins
   has_many :kind, class_name: 'Transaction::Type'
+
+  def amount_paid
+    skins.sum(&:amount_paid)
+  end
+
+  def profit
+    value - amount_paid
+  end
 end

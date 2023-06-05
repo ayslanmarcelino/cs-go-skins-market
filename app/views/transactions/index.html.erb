@@ -7,7 +7,7 @@
           <th><%= sort_link(@query, :status, t('.status')) %></th>
           <th><%= sort_link(@query, :value, t('.value')) %></th>
           <th><%= sort_link(@query, :transaction_type_description, t('.description')) %></th>
-          <th><%= sort_link(@query, :skins, t('.skins')) %></th>
+          <th><%= t('.skins') %></th>
           <th><%= t('.investiment') %></th>
           <th><%= t('.profit') %></th>
           <th><%= sort_link(@query, :created_at, t('.created_at')) %></th>
@@ -25,8 +25,8 @@
             <td><%= number_to_currency(transaction.value) %></td>
             <td><%= transaction.transaction_type.description %> #<%= transaction.identifier %></td>
             <td><%= render partial: 'transactions/components/skins', locals: { transaction: transaction } %></td>
-            <td><%= number_to_currency(transaction.skins.sum(&:amount_paid)) %></td>
-            <td><%= number_to_currency(transaction.value - transaction.skins.sum(&:amount_paid)) %></td>
+            <td><%= number_to_currency(transaction.amount_paid) %></td>
+            <td><%= number_to_currency(transaction.profit) %></td>
             <td><%= l(transaction.created_at) %></td>
             <td>
               <% if can?(:update, Transaction) %>
