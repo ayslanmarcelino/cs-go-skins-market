@@ -1,6 +1,7 @@
 pt-BR:
   transactions:
     index:
+      create_transaction_type: Novo tipo de transação
       value: Valor
       status: Status
       description: Descrição

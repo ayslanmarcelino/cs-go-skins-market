@@ -58,6 +58,7 @@ class Ability
       can([:read, :search], Skin, steam_account: @user.accounts)
       can(:enable, Skin, steam_account: @user.accounts, available: false)
       can([:update, :disable], Skin, steam_account: @user.accounts, available: true)
+      can(:create, Transaction::Type)
       can(:read, Transaction, owner: @user)
       can(:create, Transaction)
     end

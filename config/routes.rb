@@ -51,4 +51,8 @@ Rails.application.routes.draw do
   end
 
   resources :transactions, only: [:index, :new, :create]
+
+  namespace :transaction do
+    resources :types, only: [:new, :create]
+  end
 end

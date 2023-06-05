@@ -2,6 +2,12 @@
   <h4><%= t('transactions.components.layout.resource') %></h4>
   <div>
     <div class="pull-right mb-2">
+      <% if can?(:create, Transaction::Type) %>
+        <%= link_to(new_transaction_type_path, class: 'btn btn-sm -standard') do %>
+          <i class="bi bi-plus-circle"></i>
+          <%= t('.create_transaction_type') %>
+        <% end %>
+      <% end %>
       <% if can?(:create, Transaction) %>
         <%= link_to(new_transaction_path, class: 'btn btn-sm btn-success') do %>
           <i class="bi bi-plus-circle"></i>

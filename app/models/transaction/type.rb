@@ -23,6 +23,20 @@ class Transaction::Type < ApplicationRecord
   validates :description, presence: true
   validates :description, uniqueness: { scope: :enterprise_id }
 
+  before_validation :capitalize_description
+
+  def self.permitted_params
+    [
+      :id,
+      :description,
+      :enterprise_id
+    ]
+  end
+
+  def capitalize_description
+    self.description = description.capitalize
+  end
+
   def increment!
     self.counter += 1
     save

@@ -53,7 +53,7 @@ module ApplicationHelper
       transactions << ["#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}", transaction.id]
     end
 
-    transactions.sort
+    transactions.reverse
   end
 
   def current_role_kind
