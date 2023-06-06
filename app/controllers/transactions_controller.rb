@@ -33,7 +33,7 @@ class TransactionsController < ApplicationController
 
   def cancel
     if @transaction.may_cancel?
-      @transaction.cancel!
+      @transaction.cancel!(@transaction.skins)
       flash[:success] = 'Transação cancelada com sucesso.'
     elsif @transaction.canceled?
       flash[:alert] = 'Transação já cancelada.'

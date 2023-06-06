@@ -9,7 +9,7 @@ module Transactions
       state :canceled
       state :finished
 
-      event :cancel do
+      event :cancel, success: :remove_skin_transaction! do
         transitions from: :pending, to: :canceled
       end
 
@@ -27,5 +27,9 @@ module Transactions
 
   def update_skins!(transaction)
     transaction.skins.update!(available: false)
+  end
+
+  def remove_skin_transaction!(skins)
+    skins.update!(transaction_id: nil)
   end
 end
