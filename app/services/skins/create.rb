@@ -38,7 +38,7 @@ module Skins
 
         ActiveRecord::Base.transaction do
           new_skin.save
-          Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
+          Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin) if new_skin.persisted?
         end
       end
     end

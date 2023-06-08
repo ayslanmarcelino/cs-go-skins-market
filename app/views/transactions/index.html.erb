@@ -1,0 +1,87 @@
+<div class="row col-md-12">
+  <h4><%= t('transactions.components.layout.resource') %></h4>
+  <div>
+    <div class="pull-right mb-2">
+      <% if can?(:create, Transaction::Type) %>
+        <%= link_to(new_transaction_type_path, class: 'btn btn-sm -standard') do %>
+          <i class="bi bi-plus-circle"></i>
+          <%= t('.create_transaction_type') %>
+        <% end %>
+      <% end %>
+      <% if can?(:create, Transaction) %>
+        <%= link_to(new_transaction_path, class: 'btn btn-sm btn-success') do %>
+          <i class="bi bi-plus-circle"></i>
+          <%= t('application.new') %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <div class="table-wrap">
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th><%= sort_link(@query, :status, t('.status')) %></th>
+          <th><%= sort_link(@query, :value, t('.value')) %></th>
+          <th><%= sort_link(@query, :transaction_type_description, t('.description')) %></th>
+          <th><%= t('.skins') %></th>
+          <th><%= t('.investiment') %></th>
+          <th><%= t('.profit') %></th>
+          <th><%= sort_link(@query, :created_at, t('.created_at')) %></th>
+          <th><%= sort_link(@query, :updated_at, t('.updated_at')) %></th>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @transactions.each do |transaction| %>
+          <tr>
+            <td>
+              <span class="badge -<%= status_class(transaction.state) %> w-100">
+                <%= I18n.t("activerecord.attributes.transaction.aasm_state_list.#{transaction.state}") %>
+              </span>
+            </td>
+            <td><%= number_to_currency(transaction.value) %></td>
+            <td><%= transaction.transaction_type.description %> #<%= transaction.identifier %></td>
+            <td><%= render partial: 'transactions/components/skins', locals: { transaction: transaction } %></td>
+            <td><%= number_to_currency(transaction.amount_paid) %></td>
+            <td><%= number_to_currency(transaction.profit) %></td>
+            <td><%= l(transaction.created_at) %></td>
+            <td><%= l(transaction.updated_at) %></td>
+            <td>
+              <% if can?(:update, Transaction) && transaction.pending? %>
+                <%= link_to(edit_transaction_path(transaction), class: 'btn btn-sm') do %>
+                  <i class="bi bi-pencil-square"></i>
+                <% end %>
+              <% end %>
+              <% if can?(:cancel, Transaction) && transaction.pending? %>
+                <%= link_to(cancel_transaction_path(transaction),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('transactions.components.layout.cancel_confirm')}: #{transaction.transaction_type.description} ##{transaction.identifier}?"
+                            },
+                            class: 'btn btn-sm -transparent-danger') do %>
+                  <i class="bi bi-hand-thumbs-down"></i>
+                <% end %>
+              <% end %>
+              <% if can?(:finish, Transaction) && transaction.pending? %>
+                <%= link_to(finish_transaction_path(transaction),
+                            data: {
+                              turbo_method: :patch,
+                              turbo_confirm: "#{t('transactions.components.layout.finish_confirm')}: #{transaction.transaction_type.description} ##{transaction.identifier}?"
+                            },
+                            class: 'btn btn-sm -transparent-success') do %>
+                  <i class="bi bi-hand-thumbs-up"></i>
+                <% end %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+<%=
+  render partial: 'layouts/components/index/footer',
+         locals: {
+           resource: @transactions
+         }
+%>

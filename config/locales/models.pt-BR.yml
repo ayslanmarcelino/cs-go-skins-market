@@ -97,3 +97,15 @@ pt-BR:
         float: Float
         csmoney_price: Preço CS.Money
         sale_value: Preço de venda
+        transaction: Transação
+        amount_paid: Valor pago
+      transaction/type:
+        description: Descrição
+      transaction:
+        identifier: Identificador
+        value: Valor
+        transaction_type: Tipo de transação
+        aasm_state_list:
+          pending: Pendente
+          canceled: Cancelado
+          finished: Finalizado

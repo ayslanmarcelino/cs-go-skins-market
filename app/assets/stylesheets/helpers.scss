@@ -1,3 +1,17 @@
+.badge {
+  &.-success {
+    background-color: $success;
+  }
+
+  &.-danger {
+    background-color: $dark-red;
+  }
+
+  &.-primary {
+    background-color: $primary;
+  }
+}
+
 .btn {
   &.-standard {
     background-color: $grey;
@@ -52,7 +66,6 @@
   }
 
   &.-transparent-danger {
-    border-color: $grey;
     color: $grey;
 
     &:hover {
@@ -62,8 +75,13 @@
     }
   }
 
-  &.-transparent-success {
+  &.-transparent-danger-with-border {
+    @extend .-transparent-danger;
+
     border-color: $grey;
+  }
+
+  &.-transparent-success {
     color: $grey;
 
     &:hover {
@@ -71,6 +89,12 @@
       border-color: $success;
       background-color: $success;
     }
+  }
+
+  &.-transparent-success-with-border {
+    @extend .-transparent-success;
+
+    border-color: $grey;
   }
 }
 

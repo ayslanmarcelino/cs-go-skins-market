@@ -1,0 +1,19 @@
+<button type="button" class="btn btn-sm -transparent-standard <%= "disabled" if transaction.skins.blank? %>" data-toggle="modal" data-target="#skinsModal-<%= transaction.id %>">
+  <%= t('application.view') %>
+</button>
+<div class="modal fade" id="skinsModal-<%= transaction.id %>" tabindex="-1" role="dialog" aria-labelledby="skinsModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"><%= transaction.transaction_type.description %> #<%= transaction.identifier %></h5>
+      </div>
+      <div class="modal-body">
+        <% transaction.skins.each do |skin| %>
+          <%= link_to(skin_path(skin.id)) do %>
+            <li><%= skin.name %> (<%= skin.exterior %>) - <%= number_to_currency(skin.highest_value) %></li>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

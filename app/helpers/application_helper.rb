@@ -45,6 +45,19 @@ module ApplicationHelper
     users.sort
   end
 
+  def transactions_collection
+    transactions = []
+    query = Transaction.where(owner: current_user).pendings
+
+    query.each do |transaction|
+      data = "#{transaction.transaction_type.description} ##{transaction.identifier} | #{number_to_currency(transaction.value)}"
+
+      transactions << [data, transaction.id]
+    end
+
+    transactions.reverse
+  end
+
   def current_role_kind
     current_user.roles.find_by(enterprise: current_user.current_enterprise)&.kind
   end
@@ -68,5 +81,26 @@ module ApplicationHelper
     else
       "#{days_left} dias"
     end
+  end
+
+  def status_class(status)
+    status_map = {
+      pending: 'primary',
+      canceled: 'danger',
+      finished: 'success'
+    }
+
+    status_map[status.to_sym] || ''
+  end
+
+  def transaction_types_collection
+    transaction_types = []
+    query = Transaction::Type.where(enterprise: current_user.current_enterprise)
+
+    query.each do |transaction_type|
+      transaction_types << [transaction_type.description.to_s, transaction_type.id]
+    end
+
+    transaction_types.sort
   end
 end

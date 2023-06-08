@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_141152) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -128,7 +128,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_141152) do
     t.bigint "steam_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "transaction_id"
     t.index ["steam_account_id"], name: "index_skins_on_steam_account_id"
+    t.index ["transaction_id"], name: "index_skins_on_transaction_id"
   end
 
   create_table "steam_accounts", force: :cascade do |t|
@@ -147,6 +149,27 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_141152) do
     t.datetime "updated_at", null: false
     t.index ["enterprise_id"], name: "index_steam_accounts_on_enterprise_id"
     t.index ["owner_id"], name: "index_steam_accounts_on_owner_id"
+  end
+
+  create_table "transaction_types", force: :cascade do |t|
+    t.string "description"
+    t.integer "counter", default: 0
+    t.bigint "enterprise_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["enterprise_id"], name: "index_transaction_types_on_enterprise_id"
+  end
+
+  create_table "transactions", force: :cascade do |t|
+    t.float "value"
+    t.string "aasm_state", default: "pending"
+    t.integer "identifier"
+    t.bigint "owner_id"
+    t.bigint "transaction_type_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_transactions_on_owner_id"
+    t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
   end
 
   create_table "user_roles", force: :cascade do |t|
@@ -191,8 +214,12 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_141152) do
   add_foreign_key "people", "enterprises"
   add_foreign_key "skin_logs", "skins"
   add_foreign_key "skins", "steam_accounts"
+  add_foreign_key "skins", "transactions"
   add_foreign_key "steam_accounts", "enterprises"
   add_foreign_key "steam_accounts", "users", column: "owner_id"
+  add_foreign_key "transaction_types", "enterprises"
+  add_foreign_key "transactions", "transaction_types"
+  add_foreign_key "transactions", "users", column: "owner_id"
   add_foreign_key "user_roles", "enterprises"
   add_foreign_key "user_roles", "users"
   add_foreign_key "user_roles", "users", column: "created_by_id"

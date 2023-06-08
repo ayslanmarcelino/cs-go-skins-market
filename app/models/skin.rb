@@ -29,14 +29,17 @@
 #  updated_at        :datetime         not null
 #  steam_account_id  :bigint
 #  steam_id          :bigint
+#  transaction_id    :bigint
 #
 # Indexes
 #
 #  index_skins_on_steam_account_id  (steam_account_id)
+#  index_skins_on_transaction_id    (transaction_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (steam_account_id => steam_accounts.id)
+#  fk_rails_...  (transaction_id => transactions.id)
 #
 class Skin < ApplicationRecord
   REJECT_TYPES = [
@@ -46,8 +49,9 @@ class Skin < ApplicationRecord
   ].freeze
 
   belongs_to :steam_account, class_name: 'Steam::Account'
+  belongs_to :deal, class_name: 'Transaction', optional: true
 
-  validates :steam_id, uniqueness: { scope: [:steam_account_id] }
+  validates :steam_id, uniqueness: { scope: [:steam_account_id] }, if: -> { Skin.find_by(steam_id: steam_id)&.available? }
 
   has_many :logs
 
@@ -56,7 +60,9 @@ class Skin < ApplicationRecord
       :id,
       :float,
       :csmoney_price,
-      :sale_value
+      :sale_value,
+      :amount_paid,
+      :transaction_id
     ]
   end
 

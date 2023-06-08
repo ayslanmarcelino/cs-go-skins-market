@@ -55,7 +55,13 @@ class Ability
       can([:read, :update, :destroy], User::Role, enterprise: @enterprise, kind_cd: User::Role::USER_KINDS.map(&:to_s))
       can(:create, User::Role, enterprise: @enterprise)
       can([:read, :create, :update, :destroy, :disable, :enable], Steam::Account, enterprise: @enterprise, owner: @user)
-      can([:read, :update, :search, :disable, :enable], Skin, steam_account: @user.accounts)
+      can([:read, :search], Skin, steam_account: @user.accounts)
+      can(:enable, Skin, steam_account: @user.accounts, available: false)
+      can([:update, :disable], Skin, steam_account: @user.accounts, available: true)
+      can(:create, Transaction::Type)
+      can(:read, Transaction, owner: @user)
+      can(:create, Transaction)
+      can([:update, :cancel, :finish], Transaction, owner: @user, aasm_state: 'pending')
     end
 
     def viewer_abilities

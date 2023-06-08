@@ -17,7 +17,7 @@
                     turbo_method: :patch,
                     turbo_confirm: "#{t('admin.users.components.layout.activate_confirm')}: #{@user.person.name}?"
                   },
-                  class: 'btn btn-sm -transparent-success') do %>
+                  class: 'btn btn-sm -transparent-success-with-border') do %>
         <i class="bi bi-toggle-off"></i>
         <%= t('application.activate') %>
       <% end %>
@@ -28,7 +28,7 @@
                     turbo_method: :patch,
                     turbo_confirm: "#{t('admin.users.components.layout.disable_confirm')}: #{@user.person.name}?"
                   },
-                  class: 'btn btn-sm -transparent-danger') do %>
+                  class: 'btn btn-sm -transparent-danger-with-border') do %>
         <i class="bi bi-toggle-off"></i>
         <%= t('application.disable') %>
       <% end %>

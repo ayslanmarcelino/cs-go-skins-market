@@ -49,4 +49,15 @@ Rails.application.routes.draw do
       patch :enable
     end
   end
+
+  resources :transactions, only: [:index, :new, :create, :edit, :update] do
+    member do
+      patch :cancel
+      patch :finish
+    end
+  end
+
+  namespace :transaction do
+    resources :types, only: [:new, :create]
+  end
 end
