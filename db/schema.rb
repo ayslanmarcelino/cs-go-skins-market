@@ -96,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_042042) do
   create_table "skin_consults", force: :cascade do |t|
     t.string "steam_id_decimal"
     t.jsonb "raw_data", default: {}
+    t.string "source_cd"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

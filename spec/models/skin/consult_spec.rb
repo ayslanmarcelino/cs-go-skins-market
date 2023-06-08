@@ -4,6 +4,7 @@
 #
 #  id               :bigint           not null, primary key
 #  raw_data         :jsonb
+#  source_cd        :string
 #  steam_id_decimal :string
 #  created_at       :datetime         not null
 #  updated_at       :datetime         not null
