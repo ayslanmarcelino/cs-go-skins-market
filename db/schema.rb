@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_035734) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,6 +91,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
     t.index ["address_id"], name: "index_people_on_address_id"
     t.index ["enterprise_id"], name: "index_people_on_enterprise_id"
     t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
+  end
+
+  create_table "skin_consults", force: :cascade do |t|
+    t.string "steam_id_decimal"
+    t.jsonb "raw_data", default: {}
+    t.bigint "steam_account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["steam_account_id"], name: "index_skin_consults_on_steam_account_id"
   end
 
   create_table "skin_logs", force: :cascade do |t|
@@ -212,6 +221,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
+  add_foreign_key "skin_consults", "steam_accounts"
   add_foreign_key "skin_logs", "skins"
   add_foreign_key "skins", "steam_accounts"
   add_foreign_key "skins", "transactions"
