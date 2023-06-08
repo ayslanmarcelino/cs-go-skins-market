@@ -34,7 +34,7 @@ class Transaction::Type < ApplicationRecord
   end
 
   def capitalize_description
-    self.description = description.capitalize
+    self.description = description&.capitalize
   end
 
   def increment!
