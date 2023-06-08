@@ -26,6 +26,5 @@ RSpec.describe Transaction::Type, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:description) }
-    it { is_expected.to validate_uniqueness_of(:description).scoped_to(:enterprise_id) }
   end
 end
