@@ -9,7 +9,7 @@ FactoryBot.define do
     avatar_full_url { 'https://avatars.steamstatic.com/400d9312022a914738e099c7aeed856e942e059c_full.jpg' }
     real_name { 'Ayslan Marcelino' }
 
-    user { create(:user, :with_person) }
-    enterprise { user.person.enterprise }
+    owner { create(:user, :with_person) }
+    enterprise { owner.person.enterprise }
   end
 end
