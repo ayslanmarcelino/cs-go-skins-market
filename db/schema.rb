@@ -208,7 +208,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_042042) do
     t.bigint "person_id"
     t.bigint "current_enterprise_id"
     t.bigint "created_by_id"
-    t.datetime "fetch_range"
+    t.integer "interval_in_minute"
     t.datetime "last_search"
     t.index ["created_by_id"], name: "index_users_on_created_by_id"
     t.index ["current_enterprise_id"], name: "index_users_on_current_enterprise_id"

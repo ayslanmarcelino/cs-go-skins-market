@@ -8,7 +8,7 @@
 #  current_sign_in_ip     :string
 #  email                  :string           default(""), not null
 #  encrypted_password     :string           default(""), not null
-#  fetch_range            :datetime
+#  interval_in_minute     :integer
 #  last_search            :datetime
 #  last_sign_in_at        :datetime
 #  last_sign_in_ip        :string
