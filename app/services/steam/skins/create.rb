@@ -46,7 +46,8 @@ module Steam
 
         @skin_consult ||= Skin::Consult.create(
           raw_data: parsed_json,
-          steam_id_decimal: @steam_account.steam_id
+          steam_id_decimal: @steam_account.steam_id,
+          source: :steam_inventory
         )
 
         update_last_search!
@@ -65,7 +66,7 @@ module Steam
       end
 
       def skin_consult
-        @skin_consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id)
+        @skin_consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :steam_inventory)
       end
 
       def parsed_json
