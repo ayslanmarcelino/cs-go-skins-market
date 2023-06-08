@@ -3,6 +3,7 @@
 # Table name: skin_consults
 #
 #  id               :bigint           not null, primary key
+#  endpoint         :string
 #  raw_data         :jsonb
 #  source_cd        :string
 #  steam_id_decimal :string

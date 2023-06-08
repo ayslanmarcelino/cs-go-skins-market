@@ -4,6 +4,7 @@ class CreateSkinConsults < ActiveRecord::Migration[7.0]
       t.string :steam_id_decimal
       t.jsonb :raw_data, default: {}
       t.string :source_cd
+      t.string :endpoint
 
       t.timestamps
     end
