@@ -28,7 +28,7 @@ class SkinsController < ApplicationController
   end
 
   def search
-    @search ||= Steam::Skins::Create.call(steam_account: steam_account)
+    @search ||= Steam::Skins::Create.call(current_user: current_user, steam_account: steam_account)
   end
 
   def disable
