@@ -4,8 +4,6 @@ class CreateSkinConsults < ActiveRecord::Migration[7.0]
       t.string :steam_id_decimal
       t.jsonb :raw_data, default: {}
 
-      t.references :steam_account, foreign_key: true
-
       t.timestamps
     end
   end

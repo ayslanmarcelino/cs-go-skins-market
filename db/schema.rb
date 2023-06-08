@@ -96,10 +96,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_035734) do
   create_table "skin_consults", force: :cascade do |t|
     t.string "steam_id_decimal"
     t.jsonb "raw_data", default: {}
-    t.bigint "steam_account_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["steam_account_id"], name: "index_skin_consults_on_steam_account_id"
   end
 
   create_table "skin_logs", force: :cascade do |t|
@@ -221,7 +219,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_035734) do
   add_foreign_key "enterprises", "users", column: "created_by_id"
   add_foreign_key "people", "addresses"
   add_foreign_key "people", "enterprises"
-  add_foreign_key "skin_consults", "steam_accounts"
   add_foreign_key "skin_logs", "skins"
   add_foreign_key "skins", "steam_accounts"
   add_foreign_key "skins", "transactions"
