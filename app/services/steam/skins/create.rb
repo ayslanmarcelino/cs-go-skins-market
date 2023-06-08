@@ -12,22 +12,22 @@ module Steam
         ActiveRecord::Base.transaction do
           create_consult!
           update_consult!
-          create!
+          create_skins!
         end
       end
 
       private
 
-      def create!
+      def create_skins!
         ::Skins::Create.call(steam_account: @steam_account, skins: skins, inventory: inventory)
       end
 
       def inventory
-        @inventory ||= @skin_consult.raw_data['assets']
+        @inventory ||= skin_consult.raw_data['assets']
       end
 
       def skins
-        @skins ||= @skin_consult.raw_data['descriptions'].reverse
+        @skins ||= skin_consult.raw_data['descriptions'].reverse
       end
 
       def update_consult!
@@ -61,7 +61,7 @@ module Steam
       end
 
       def interval_in_minute
-        @interval_in_minute ||= @current_user.interval_in_minute.nil? ? nil : @current_user.interval_in_minute.minutes.ago
+        @interval_in_minute ||= @current_user.interval_in_minute&.minutes&.ago
       end
 
       def skin_consult
