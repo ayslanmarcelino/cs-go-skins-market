@@ -9,6 +9,8 @@ module Steam
       end
 
       def call
+        return unless permitted_update?
+
         ActiveRecord::Base.transaction do
           create_consult!
           update_consult!
@@ -31,7 +33,7 @@ module Steam
       end
 
       def update_consult!
-        return unless permitted_update?
+        return unless skin_consult
 
         skin_consult.update(
           raw_data: parsed_json,
@@ -57,10 +59,6 @@ module Steam
         @current_user.update(last_search: Time.current)
       end
 
-      def permitted_update?
-        !@current_user.last_search.between?(interval_in_minute.presence || DEFAULT_BETWEEN_TIME.minutes.ago, Time.current)
-      end
-
       def interval_in_minute
         @interval_in_minute ||= @current_user.interval_in_minute&.minutes&.ago
       end
@@ -75,6 +73,10 @@ module Steam
 
       def request
         @request ||= Steam::Request.call(steam_id: @steam_account.steam_id)
+      end
+
+      def permitted_update?
+        !@current_user.last_search.between?(interval_in_minute.presence || DEFAULT_BETWEEN_TIME.minutes.ago, Time.current)
       end
     end
   end
