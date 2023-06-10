@@ -1,6 +1,12 @@
 <div class="row col-md-12">
   <h4><%= t('transactions.components.layout.resource') %></h4>
   <div>
+    <%= render(layout: 'layouts/components/filter/body') do %>
+      <%= search_form_for(@query, url: transactions_path) do |form| %>
+        <%= render(partial: 'transactions/components/filters', locals: { form: form }) %>
+        <%= render(partial: 'layouts/components/filter/footer', locals: { form: form }) %>
+      <% end %>
+    <% end %>
     <div class="pull-right mb-2">
       <% if can?(:create, Transaction::Type) %>
         <%= link_to(new_transaction_type_path, class: 'btn btn-sm -standard') do %>

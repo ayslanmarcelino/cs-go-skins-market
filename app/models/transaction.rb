@@ -30,6 +30,12 @@ class Transaction < ApplicationRecord
     :finished
   ].freeze
 
+  TRANSLATED_STATES = [
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.pending'), :pending],
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.canceled'), :canceled],
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.finished'), :finished]
+  ].sort.freeze
+
   belongs_to :transaction_type, class_name: 'Transaction::Type'
   belongs_to :owner, class_name: 'User'
 
