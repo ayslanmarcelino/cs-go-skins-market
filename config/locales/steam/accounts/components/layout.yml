@@ -4,6 +4,7 @@ pt-BR:
       components:
         layout:
           resource: Contas Steam
-          enable_confirm: Você deseja ATUALIZAR as informações da conta steam
-          delete_confirm: Você deseja EXCLUIR a conta steam
+          update: Você deseja ATUALIZAR as informações da conta steam
+          enable_confirm: Você deseja marcar como DISPONÍVEL a conta steam
+          disable_confirm: Você deseja marcar como INDISPONÍVEL a conta steam
           new: Nova conta steam
