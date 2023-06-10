@@ -48,6 +48,7 @@ class User < ApplicationRecord
 
   has_many :roles, dependent: :destroy
   has_many :accounts, class_name: 'Steam::Account', foreign_key: 'owner_id', inverse_of: :owner
+  has_many :transactions, class_name: 'Transaction', foreign_key: 'owner_id', inverse_of: :owner
 
   accepts_nested_attributes_for :person
 

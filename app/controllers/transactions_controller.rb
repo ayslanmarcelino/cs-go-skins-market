@@ -31,6 +31,14 @@ class TransactionsController < ApplicationController
     end
   end
 
+  def update
+    if @transaction.update(transaction_params)
+      redirect_success(path: transactions_path, action: 'atualizada')
+    else
+      render(:edit, status: :unprocessable_entity)
+    end
+  end
+
   def cancel
     if @transaction.may_cancel?
       @transaction.cancel!(@transaction.skins)
