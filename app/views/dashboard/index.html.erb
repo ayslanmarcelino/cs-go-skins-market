@@ -8,19 +8,19 @@
       <% end %>
     </div>
   </div>
-</div>
-<div class="col-xl-12 col-md-12 mb-4">
-  <div class="card border-left-primary shadow h-100 py-2">
-    <div class="card-body">
-      <div class="row no-gutters align-items-center">
-        <div class="col mr-2">
-          <h4 class="text-center"><%= t('.profit_by_month_chart') %></h4>
-          <div class="d-flex justify-content-between">
-            <%= line_chart(@finished_transactions_by_month) %>
+  <div class="col-xl-12 col-md-12 mb-4">
+    <div class="card border-left-primary shadow h-100 py-2">
+      <div class="card-body">
+        <div class="row no-gutters align-items-center">
+          <div class="col mr-2">
+            <h5 class="text-center"><%= t('.profit_by_month_chart') %></h5>
+            <div class="d-flex justify-content-between">
+              <%= line_chart(@finished_transactions_by_month) %>
+            </div>
+            <span class="pull-right mt-4">
+              <%= link_to('Ver detalhes', transactions_path, style: 'font-size: 12px;') %>
+            </span>
           </div>
-          <span class="pull-right mt-4">
-            <%= link_to('Ver detalhes', transactions_path, style: 'font-size: 12px;') %>
-          </span>
         </div>
       </div>
     </div>
