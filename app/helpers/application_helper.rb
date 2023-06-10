@@ -119,4 +119,12 @@ module ApplicationHelper
 
     accounts.sort
   end
+
+  def profit_color(value)
+    if value.negative?
+      'danger'
+    elsif value.positive?
+      'success'
+    end
+  end
 end

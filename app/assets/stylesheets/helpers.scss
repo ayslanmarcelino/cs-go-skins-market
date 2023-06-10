@@ -1,3 +1,15 @@
+.text {
+  font-weight: bold;
+
+  &.-success {
+    color: $success;
+  }
+
+  &.-danger {
+    color: $danger;
+  }
+}
+
 .badge {
   &.-success {
     background-color: $success;
