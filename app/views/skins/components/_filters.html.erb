@@ -1,0 +1,19 @@
+<div class="row mb-3">
+  <div class="col-md-4">
+    <%= form.text_field :name_cont, placeholder: t('skins.index.name'), class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+    <%= form.select :exterior_eq, Skin::EXTERIOR_TYPES, { include_blank: 'Selecione um exterior' }, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+    <%= form.select :steam_account_id_eq, accounts_collection, { include_blank: 'Selecione uma conta' }, class: 'form-control' %>
+  </div>
+</div>
+<div>
+  <%= check_box_tag('q[available_in][]') %>
+  <%= form.label(t('application.only_enabled')) %>
+</div>
+<div>
+  <%= check_box_tag('q[available_in][]', '0') %>
+  <%= form.label(t('application.only_disabled')) %>
+</div>

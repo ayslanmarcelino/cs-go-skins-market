@@ -1,6 +1,12 @@
 <div class="row col-md-12">
   <h4><%= t('skins.components.layout.resource') %></h4>
   <div>
+    <%= render(layout: 'layouts/components/filter/body') do %>
+      <%= search_form_for(@query, url: skins_path) do |form| %>
+        <%= render(partial: 'skins/components/filters', locals: { form: form }) %>
+        <%= render(partial: 'layouts/components/filter/footer', locals: { form: form }) %>
+      <% end %>
+    <% end %>
     <div class="pull-right mb-2">
       <% if can?(:search, Skin) %>
         <%= render partial: 'skins/components/modal_search' %>
