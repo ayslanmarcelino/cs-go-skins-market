@@ -25,7 +25,7 @@ module Skins
 
         ActiveRecord::Base.transaction do
           new_skin.save
-          create_log!(new_skin: new_skin) if new_skin.persisted?
+          create_log!(new_skin: new_skin)
         end
       end
     end
