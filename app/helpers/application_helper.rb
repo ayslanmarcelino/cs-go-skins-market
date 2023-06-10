@@ -103,4 +103,9 @@ module ApplicationHelper
 
     transaction_types.sort
   end
+
+  def next_update_with_steam
+    interval_time = (current_user.interval_in_minute&.minutes.presence || Steam::Skins::Create::DEFAULT_BETWEEN_TIME.minutes)
+    current_user.last_search + interval_time
+  end
 end

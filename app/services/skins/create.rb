@@ -21,26 +21,33 @@ module Skins
 
         new_skin = Skin.new
         fill_basic_data(skin: skin, new_skin: new_skin)
-
-        new_skin.steam_id = asset_id
-        new_skin.image = image(skin: skin)
-        new_skin.inspect_url = inspect_url(skin: skin, asset_id: asset_id)
-        new_skin.exterior = exterior(skin: skin)
-        new_skin.name_tag = name_tag(skin: skin)
-        new_skin.has_name_tag = new_skin.name_tag.present?
-        new_skin.steam_price = steam_price(skin_name: new_skin.market_name)
-        new_skin.first_steam_price = new_skin.steam_price
-        new_skin.stattrak = stattrak?(skin: skin)
-        new_skin.sticker_name = sticker_name(skin: skin)
-        new_skin.sticker_image = sticker_image(skin: skin)
-        new_skin.has_sticker = new_skin.sticker_name.present? || new_skin.sticker_image.present?
-        new_skin.expiration_date = expiration_date(class_id: skin['classid'])
+        fill_data(asset_id: asset_id, skin: skin, new_skin: new_skin)
 
         ActiveRecord::Base.transaction do
           new_skin.save
-          Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin) if new_skin.persisted?
+          create_log!(new_skin: new_skin)
         end
       end
+    end
+
+    def create_log!(new_skin:)
+      @create_log ||= Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
+    end
+
+    def fill_data(asset_id:, skin:, new_skin:)
+      new_skin.steam_id = asset_id
+      new_skin.image = image(skin: skin)
+      new_skin.inspect_url = inspect_url(skin: skin, asset_id: asset_id)
+      new_skin.exterior = exterior(skin: skin)
+      new_skin.name_tag = name_tag(skin: skin)
+      new_skin.has_name_tag = new_skin.name_tag.present?
+      new_skin.steam_price = steam_price(skin_name: new_skin.market_name)
+      new_skin.first_steam_price = new_skin.steam_price
+      new_skin.stattrak = stattrak?(skin: skin)
+      new_skin.sticker_name = sticker_name(skin: skin)
+      new_skin.sticker_image = sticker_image(skin: skin)
+      new_skin.has_sticker = new_skin.sticker_name.present? || new_skin.sticker_image.present?
+      new_skin.expiration_date = expiration_date(class_id: skin['classid'])
     end
 
     def fill_basic_data(skin:, new_skin:)

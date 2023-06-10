@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_08_042042) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -91,6 +91,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
     t.index ["address_id"], name: "index_people_on_address_id"
     t.index ["enterprise_id"], name: "index_people_on_enterprise_id"
     t.index ["owner_type", "owner_id"], name: "index_people_on_owner"
+  end
+
+  create_table "skin_consults", force: :cascade do |t|
+    t.string "steam_id_decimal"
+    t.jsonb "raw_data", default: {}
+    t.string "source_cd"
+    t.string "endpoint"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "skin_logs", force: :cascade do |t|
@@ -201,6 +210,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_05_123110) do
     t.bigint "person_id"
     t.bigint "current_enterprise_id"
     t.bigint "created_by_id"
+    t.integer "interval_in_minute"
+    t.datetime "last_search"
     t.index ["created_by_id"], name: "index_users_on_created_by_id"
     t.index ["current_enterprise_id"], name: "index_users_on_current_enterprise_id"
     t.index ["email"], name: "index_users_on_email", unique: true

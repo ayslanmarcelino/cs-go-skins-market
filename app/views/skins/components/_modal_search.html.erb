@@ -8,7 +8,15 @@
     <div class="modal-content">
       <div class="modal-body">
         <%= form_with(url: search_skins_path, method: :post) do |form| %>
-          <%= form.collection_select(:steam_account_id, @steam_accounts, :id, :formatted_name, { include_blank: t('application.select') }, { class: 'form-control', required: true }) %>
+          <% if current_user.last_search %>
+            <div>
+              Sua última atualização com a Steam foi: <b><%= l(current_user.last_search) %></b>
+            </div>
+            <div>
+              Próxima atualização com a Steam disponível: <b><%= l(next_update_with_steam) %></b>
+            </div>
+          <% end %>
+          <%= form.collection_select(:steam_account_id, @steam_accounts, :id, :formatted_name, { include_blank: t('application.select') }, { class: 'form-control mt-3', required: true }) %>
           <div class="pull-right mt-2">
             <a class="btn btn-secondary text-white" data-dismiss="modal">
               <i class="bi bi-x-lg"></i>
