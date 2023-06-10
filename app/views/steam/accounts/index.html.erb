@@ -1,6 +1,12 @@
 <div class="row col-md-12">
   <h4><%= t('steam.accounts.components.layout.resource') %></h4>
   <div>
+    <%= render(layout: 'layouts/components/filter/body') do %>
+      <%= search_form_for(@query, url: steam_accounts_path) do |form| %>
+        <%= render(partial: 'steam/accounts/components/filters', locals: { form: form }) %>
+        <%= render(partial: 'layouts/components/filter/footer', locals: { form: form }) %>
+      <% end %>
+    <% end %>
     <div class="pull-right mb-2">
       <% if can?(:create, Steam::Account) %>
         <%= link_to(new_steam_account_path, class: 'btn btn-sm btn-success') do %>

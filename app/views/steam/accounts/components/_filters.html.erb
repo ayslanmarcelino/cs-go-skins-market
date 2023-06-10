@@ -1,0 +1,15 @@
+<div class="row mb-3">
+  <div class="col-md-3">
+    <%= form.text_field :steam_id_cont, placeholder: t('steam.accounts.index.steam_id'), class: 'form-control' %>
+  </div>
+  <div class="col-md-3">
+    <%= form.text_field :steam_custom_id_cont, placeholder: t('steam.accounts.index.steam_custom_id'), class: 'form-control' %>
+  </div>
+  <div class="col-md-3">
+    <%= form.text_field :nickname_cont, placeholder: t('steam.accounts.index.nickname'), class: 'form-control' %>
+  </div>
+  <div class="col-md-3">
+    <%= form.text_field :real_name_cont, placeholder: t('steam.accounts.index.real_name'), class: 'form-control' %>
+  </div>
+</div>
+<%= render partial: 'layouts/components/filter/active', locals: { form: form } %>
