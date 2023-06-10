@@ -211,6 +211,10 @@ Naming/PredicateName:
 Naming/MethodParameterName:
   Enabled: false
 
+Naming/MemoizedInstanceVariableName:
+  Exclude:
+    - app/services/steam/skins/assets/price/find.rb
+
 Layout/EmptyLinesAroundAttributeAccessor:
   Enabled: true
 
