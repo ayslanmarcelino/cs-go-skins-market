@@ -48,6 +48,15 @@ class Skin < ApplicationRecord
     'Ferramenta (Nível Básico)'
   ].freeze
 
+  EXTERIOR_TYPES = [
+    'Pouco Usada',
+    'Testada em Campo',
+    'Nova de Fábrica',
+    'Bem Desgastada',
+    'Veterana de Guerra',
+    'Nenhum'
+  ].freeze
+
   belongs_to :steam_account, class_name: 'Steam::Account'
   belongs_to :deal, class_name: 'Transaction', optional: true
 

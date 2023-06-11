@@ -31,7 +31,7 @@ module Skins
     end
 
     def create_log!(new_skin:)
-      @create_log ||= Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
+      Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
     end
 
     def fill_data(asset_id:, skin:, new_skin:)

@@ -30,6 +30,12 @@ class Transaction < ApplicationRecord
     :finished
   ].freeze
 
+  TRANSLATED_STATES = [
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.pending'), :pending],
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.canceled'), :canceled],
+    [I18n.t('activerecord.attributes.transaction.aasm_state_list.finished'), :finished]
+  ].sort.freeze
+
   belongs_to :transaction_type, class_name: 'Transaction::Type'
   belongs_to :owner, class_name: 'User'
 
@@ -55,5 +61,11 @@ class Transaction < ApplicationRecord
 
   def profit
     value - amount_paid
+  end
+
+  def profit_percentage
+    return 100 if amount_paid.zero?
+
+    - ((amount_paid / value) * 100 - 100).round(1)
   end
 end

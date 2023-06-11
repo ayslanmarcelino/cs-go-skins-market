@@ -10,8 +10,8 @@ pt-BR:
     clear: Limpar
     search: Buscar
     view: Visualizar
-    only_active: Apenas ativos
-    only_disabled: Apenas desativados
+    only_enabled: Apenas disponíveis
+    only_disabled: Apenas indisponíveis
     new: Novo
     create: Criar
     update: Atualizar

@@ -1,6 +1,12 @@
 <div class="row col-md-12">
   <h4><%= t('transactions.components.layout.resource') %></h4>
   <div>
+    <%= render(layout: 'layouts/components/filter/body') do %>
+      <%= search_form_for(@query, url: transactions_path) do |form| %>
+        <%= render(partial: 'transactions/components/filters', locals: { form: form }) %>
+        <%= render(partial: 'layouts/components/filter/footer', locals: { form: form }) %>
+      <% end %>
+    <% end %>
     <div class="pull-right mb-2">
       <% if can?(:create, Transaction::Type) %>
         <%= link_to(new_transaction_type_path, class: 'btn btn-sm -standard') do %>
@@ -25,7 +31,8 @@
           <th><%= sort_link(@query, :transaction_type_description, t('.description')) %></th>
           <th><%= t('.skins') %></th>
           <th><%= t('.investiment') %></th>
-          <th><%= t('.profit') %></th>
+          <th><%= t('.profit') %> (R$)</th>
+          <th><%= t('.profit') %> (%)</th>
           <th><%= sort_link(@query, :created_at, t('.created_at')) %></th>
           <th><%= sort_link(@query, :updated_at, t('.updated_at')) %></th>
           <th>&nbsp;</th>
@@ -43,7 +50,8 @@
             <td><%= transaction.transaction_type.description %> #<%= transaction.identifier %></td>
             <td><%= render partial: 'transactions/components/skins', locals: { transaction: transaction } %></td>
             <td><%= number_to_currency(transaction.amount_paid) %></td>
-            <td><%= number_to_currency(transaction.profit) %></td>
+            <td class="<%= "text -#{profit_color(transaction.profit)}" %>"><%= number_to_currency(transaction.profit) %></td>
+            <td><%= transaction.profit_percentage %>%</td>
             <td><%= l(transaction.created_at) %></td>
             <td><%= l(transaction.updated_at) %></td>
             <td>

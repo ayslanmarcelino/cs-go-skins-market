@@ -108,4 +108,23 @@ module ApplicationHelper
     interval_time = (current_user.interval_in_minute&.minutes.presence || Steam::Skins::Create::DEFAULT_BETWEEN_TIME.minutes)
     current_user.last_search + interval_time
   end
+
+  def accounts_collection
+    accounts = []
+    query = current_user.accounts
+
+    query.each do |account|
+      accounts << [account.nickname.to_s, account.id]
+    end
+
+    accounts.sort
+  end
+
+  def profit_color(value)
+    if value.negative?
+      'danger'
+    elsif value.positive?
+      'success'
+    end
+  end
 end

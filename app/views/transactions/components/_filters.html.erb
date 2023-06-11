@@ -1,0 +1,11 @@
+<div class="row mb-3">
+  <div class="col-md-3">
+    <%= form.select :aasm_state_eq, Transaction::TRANSLATED_STATES, { include_blank: 'Selecione um status' }, class: 'form-control' %>
+  </div>
+  <div class="col-md-4">
+    <%= form.select :transaction_type_id_eq, transaction_types_collection, { include_blank: 'Selecione um tipo de transação' }, class: 'form-control' %>
+  </div>
+  <div class="col-md-5">
+    <%= form.number_field :identifier_eq, placeholder: t('transactions.index.identifier'), class: 'form-control' %>
+  </div>
+</div>
