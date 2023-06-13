@@ -45,6 +45,10 @@ Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*'
 
+Lint/DuplicateHashKey:
+  Exclude:
+    - 'app/models/ability.rb'
+
 Lint/EmptyWhen:
   Enabled: false
 
