@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_08_042042) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_14_170458) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -177,6 +177,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_08_042042) do
     t.bigint "transaction_type_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.float "amount_paid", default: 0.0
     t.index ["owner_id"], name: "index_transactions_on_owner_id"
     t.index ["transaction_type_id"], name: "index_transactions_on_transaction_type_id"
   end
