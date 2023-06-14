@@ -11,6 +11,9 @@
       <% if can?(:search, Skin) %>
         <%= render partial: 'skins/components/modal_search' %>
       <% end %>
+      <% if can?(:update_prices, Skin) %>
+        <%= render partial: 'skins/components/modal_update_prices' %>
+      <% end %>
     </div>
   </div>
   <div class="table-wrap">

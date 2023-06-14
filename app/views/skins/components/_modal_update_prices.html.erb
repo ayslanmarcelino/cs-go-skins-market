@@ -1,0 +1,34 @@
+<button type="button" class="btn btn-sm btn-dark" data-toggle="modal" data-target="#modalUpdatePrices">
+  <i class="bi bi-search"></i>
+  <%= t('application.update_prices') %>
+</button>
+
+<div class="modal fade" id="modalUpdatePrices" tabindex="-1" role="dialog" aria-labelledby="modalUpdatePricesLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <%= form_with(url: update_prices_skins_path, method: :post) do |form| %>
+          <% if current_user.last_search %>
+            <div>
+              Sua última atualização com a Steam foi: <b><%= l(current_user.last_search) %></b>
+            </div>
+            <div>
+              Próxima atualização com a Steam disponível: <b><%= l(next_update_with_steam) %></b>
+            </div>
+          <% end %>
+          <%= form.collection_select(:steam_account_id, @steam_accounts, :id, :formatted_name, { include_blank: t('application.select') }, { class: 'form-control mt-3', required: true }) %>
+          <div class="pull-right mt-2">
+            <a class="btn btn-secondary text-white" data-dismiss="modal">
+              <i class="bi bi-x-lg"></i>
+              <%= t('application.cancel') %>
+            </a>
+            <%= button_tag('submit', class: 'btn btn-dark') do %>
+              <i class="bi bi-search"></i>
+              <%= t('application.update_prices') %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
