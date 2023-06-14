@@ -16,24 +16,17 @@ module Charts
           def generate
             @current_user.transactions
                          .finisheds
-                         .joins(:transaction_type)
+                         .select(date_trunc, profit)
                          .group(date_trunc)
-                         .select(
-                           date_trunc.as("month"),
-                           Arel.sql(
-                             "SUM(transactions.value - COALESCE(skins.amount_paid, 0)) AS profit"
-                           )
-                         )
-                         .left_joins(:skins)
-                         .order(date_trunc)
-                         .pluck(
-                           date_trunc,
-                           Arel.sql("SUM(transactions.value - COALESCE(skins.amount_paid, 0))")
-                         )
+                         .pluck(date_trunc, profit)
           end
 
           def date_trunc
             Arel.sql("DATE_TRUNC('month', transactions.created_at)::date")
+          end
+
+          def profit
+            Arel.sql('SUM(transactions.value - transactions.amount_paid)')
           end
         end
       end
