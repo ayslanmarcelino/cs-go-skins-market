@@ -1,6 +1,7 @@
 <div>
   <h4>
     <%= t("application.#{action_header}") %>
+    <%= "- #{@transaction.transaction_type.description} ##{@transaction.identifier}" if action_header == 'editing' %>
   </h4>
 </div>
 <div>

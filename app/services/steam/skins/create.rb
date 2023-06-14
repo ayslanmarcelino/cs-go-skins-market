@@ -76,7 +76,7 @@ module Steam
       end
 
       def permitted_update?
-        !@current_user.last_search.between?(interval_in_minute.presence || DEFAULT_BETWEEN_TIME.minutes.ago, Time.current)
+        !@current_user.last_search&.between?(interval_in_minute.presence || DEFAULT_BETWEEN_TIME.minutes.ago, Time.current)
       end
     end
   end

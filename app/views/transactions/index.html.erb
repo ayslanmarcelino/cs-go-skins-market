@@ -70,7 +70,7 @@
                   <i class="bi bi-hand-thumbs-down"></i>
                 <% end %>
               <% end %>
-              <% if can?(:finish, Transaction) && transaction.pending? %>
+              <% if can?(:finish, Transaction) && transaction.pending? && transaction.skins.present? %>
                 <%= link_to(finish_transaction_path(transaction),
                             data: {
                               turbo_method: :patch,

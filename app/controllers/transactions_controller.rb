@@ -32,7 +32,7 @@ class TransactionsController < ApplicationController
   end
 
   def update
-    if @transaction.update(transaction_params)
+    if @transaction.update(transaction_params.excluding(:transaction_type_id))
       redirect_success(path: transactions_path, action: 'atualizada')
     else
       render(:edit, status: :unprocessable_entity)

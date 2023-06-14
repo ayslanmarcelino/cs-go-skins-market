@@ -55,7 +55,7 @@ class Ability
       can([:read, :update, :destroy], User::Role, enterprise: @enterprise, kind_cd: User::Role::USER_KINDS.map(&:to_s))
       can(:create, User::Role, enterprise: @enterprise)
       can([:read, :create, :update, :destroy, :disable, :enable], Steam::Account, enterprise: @enterprise, owner: @user)
-      can([:read, :search], Skin, steam_account: @user.accounts)
+      can([:read, :search], Skin, steam_account: @user.accounts, steam_account: { enterprise: @enterprise })
       can(:enable, Skin, steam_account: @user.accounts, available: false)
       can([:update, :disable], Skin, steam_account: @user.accounts, available: true)
       can(:create, Transaction::Type)

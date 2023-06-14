@@ -67,7 +67,7 @@ class SkinsController < ApplicationController
   end
 
   def steam_accounts
-    @steam_accounts ||= Steam::Account.where(owner: current_user, active: true)
+    @steam_accounts ||= Steam::Account.where(owner: current_user, enterprise: current_user.current_enterprise, active: true)
   end
 
   def redirect_success(path:, action:)
