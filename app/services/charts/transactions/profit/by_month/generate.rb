@@ -26,7 +26,7 @@ module Charts
           end
 
           def profit
-            Arel.sql('SUM(transactions.value - transactions.amount_paid)')
+            Arel.sql("ROUND(SUM(transactions.value - transactions.amount_paid)::numeric, 2)")
           end
         end
       end
