@@ -42,6 +42,7 @@ Rails.application.routes.draw do
   resources :skins, only: [:index, :show, :edit, :update] do
     collection do
       post 'search'
+      post 'update_prices'
     end
 
     member do
