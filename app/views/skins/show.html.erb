@@ -55,7 +55,7 @@
         </tr>
       </thead>
       <tbody>
-        <% @skin.logs.each do |log| %>
+        <% @skin.logs.order(created_at: :desc).each do |log| %>
           <tr>
             <td><%= number_to_currency(log.steam_price) %></td>
             <td><%= l(log.created_at) %></td>

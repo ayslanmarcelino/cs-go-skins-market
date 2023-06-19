@@ -9,7 +9,26 @@
     <% end %>
     <div class="pull-right mb-2">
       <% if can?(:search, Skin) %>
-        <%= render partial: 'skins/components/modal_search' %>
+        <%=
+          render partial: 'skins/components/modal',
+                 locals: {
+                   url: search_skins_path,
+                   id: 'search_skins',
+                   label: 'search',
+                   icon: 'search'
+                 }
+        %>
+      <% end %>
+      <% if can?(:update_prices, Skin) %>
+        <%=
+          render partial: 'skins/components/modal',
+                 locals: {
+                   url: update_prices_skins_path,
+                   id: 'update_prices',
+                   label: 'update',
+                   icon: 'arrow-repeat'
+                 }
+        %>
       <% end %>
     </div>
   </div>

@@ -4,6 +4,7 @@
 #
 #  id                  :bigint           not null, primary key
 #  aasm_state          :string           default("pending")
+#  amount_paid         :float            default(0.0)
 #  identifier          :integer
 #  value               :float
 #  created_at          :datetime         not null

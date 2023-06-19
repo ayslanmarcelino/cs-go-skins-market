@@ -34,6 +34,8 @@ class Steam::Account < ApplicationRecord
   validates :steam_custom_id, presence: true
   validates :steam_custom_id, uniqueness: { scope: [:owner_id, :enterprise_id] }
 
+  before_validation :downcase_steam_custom_id
+
   def self.permitted_params
     [
       :id,
@@ -42,6 +44,10 @@ class Steam::Account < ApplicationRecord
       :enterprise_id,
       :owner_id
     ]
+  end
+
+  def downcase_steam_custom_id
+    self.steam_custom_id = steam_custom_id&.downcase
   end
 
   def formatted_name

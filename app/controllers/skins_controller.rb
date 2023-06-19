@@ -29,7 +29,13 @@ class SkinsController < ApplicationController
 
   def search
     ActiveRecord::Base.transaction do
-      @search ||= Steam::Skins::Create.call(current_user: current_user, steam_account: steam_account)
+      Steam::Skins::Create.call(current_user: current_user, steam_account: steam_account)
+    end
+  end
+
+  def update_prices
+    ActiveRecord::Base.transaction do
+      Steam::Skins::Assets::Price::Update.call(current_user: current_user, steam_account: steam_account)
     end
   end
 
