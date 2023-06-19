@@ -21,15 +21,15 @@ module Skins
 
           persisted_skin = find_skin(asset_id: asset_id)
 
-          if persisted_skin
-            new_steam_price = steam_price(skin_name: skin['market_hash_name'])
+          next unless persisted_skin
 
-            next if new_steam_price == persisted_skin.steam_price
+          new_steam_price = steam_price(skin_name: skin['market_hash_name'])
 
-            ActiveRecord::Base.transaction do
-              persisted_skin.update(steam_price: new_steam_price)
-              create_log!(new_skin: persisted_skin)
-            end
+          next if new_steam_price == persisted_skin.steam_price
+
+          ActiveRecord::Base.transaction do
+            persisted_skin.update(steam_price: new_steam_price)
+            create_log!(new_skin: persisted_skin)
           end
         end
       end
@@ -37,7 +37,7 @@ module Skins
       def create_log!(new_skin:)
         Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
       end
-      
+
       def steam_price(skin_name:)
         Steam::Skins::Assets::Price::Find.call(skin_name: skin_name)
       end

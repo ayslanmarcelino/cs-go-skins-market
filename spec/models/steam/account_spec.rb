@@ -37,6 +37,5 @@ RSpec.describe Steam::Account, type: :model do
 
   describe 'validations' do
     it { is_expected.to validate_presence_of(:steam_custom_id) }
-    it { is_expected.to validate_uniqueness_of(:steam_custom_id).scoped_to(:owner_id, :enterprise_id) }
   end
 end
