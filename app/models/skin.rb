@@ -60,7 +60,7 @@ class Skin < ApplicationRecord
   belongs_to :steam_account, class_name: 'Steam::Account'
   belongs_to :deal, class_name: 'Transaction', optional: true
 
-  validates :steam_id, uniqueness: { scope: [:steam_account_id] }, if: -> { Skin.find_by(steam_id: steam_id)&.available? }
+  validates :steam_id, uniqueness: { scope: [:steam_account_id] }, unless: -> { Skin.where(steam_id: steam_id).last&.available? }
 
   has_many :logs
 
