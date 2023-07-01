@@ -10,7 +10,7 @@
       <div class="modal-body">
         <% transaction.skins.order(steam_price: :desc).each do |skin| %>
           <%= link_to(skin_path(skin.id)) do %>
-            <li><%= skin.name %> (<%= skin.exterior %>) - <%= number_to_currency(skin.highest_value) %></li>
+            <li><%= skin.name %> (<%= skin.exterior %>) - *<%= number_to_currency(skin.highest_value) %>*</li>
           <% end %>
         <% end %>
       </div>
