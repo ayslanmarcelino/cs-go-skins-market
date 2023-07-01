@@ -1,4 +1,38 @@
 <div class="d-inline-flex p-5 row col-md-12">
+  <div class="mb-2">
+    <%= link_to :back, class: 'btn btn-sm -bg-primary' do %>
+      <i class="bi bi-arrow-left"></i>
+      <%= t('application.back') %>
+    <% end %>
+    <% if can?(:update, Skin) && @skin.available? %>
+      <%= link_to(edit_skin_path(@skin), class: 'btn btn-sm -transparent-standard') do %>
+        <i class="bi bi-pencil-square"></i>
+        <%= t('application.edit') %>
+      <% end %>
+    <% end %>
+    <% if unavailable?(@skin) && can?(:enable, Skin) && @skin.transaction_id.blank? %>
+      <%= link_to(enable_skin_path(@skin),
+                  data: {
+                    turbo_method: :patch,
+                    turbo_confirm: "#{t('skins.components.layout.enable_confirm')}: #{@skin.name}?"
+                  },
+                  class: 'btn btn-sm -transparent-success-with-border') do %>
+        <i class="bi bi-toggle-off"></i>
+        <%= t('application.activate') %>
+      <% end %>
+    <% end %>
+    <% if @skin.available? && can?(:disable, Skin) %>
+      <%= link_to(disable_skin_path(@skin),
+                  data: {
+                    turbo_method: :patch,
+                    turbo_confirm: "#{t('skins.components.layout.disable_confirm')}: #{@skin.name}?"
+                  },
+                  class: 'btn btn-sm -transparent-danger-with-border') do %>
+        <i class="bi bi-toggle-off"></i>
+        <%= t('application.disable') %>
+      <% end %>
+    <% end %>
+  </div>
   <div class="col-md-5">
     <%= image_tag(@skin.image, width: '100%') %>
     <%= link_to(@skin.inspect_url, class: 'btn btn-sm -transparent-standard w-100 mt-2') do %>

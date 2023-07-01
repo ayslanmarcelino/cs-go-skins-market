@@ -43,7 +43,7 @@
               <span class="<%= active?(account.active) %>"></span>
             </td>
             <td>
-              <% if can?(:update, Steam::Account) %>
+              <% if can?(:update, Steam::Account) && account.active? %>
                 <%= link_to(steam_account_path(account),
                             data: {
                               turbo_method: :patch,

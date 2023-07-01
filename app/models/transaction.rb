@@ -67,6 +67,6 @@ class Transaction < ApplicationRecord
   def profit_percentage
     return 100 if amount_paid.zero?
 
-    - ((amount_paid / value) * 100 - 100).round(1)
+    ((value / amount_paid) * 100 - 100).round(1)
   end
 end

@@ -1,7 +1,7 @@
 <div>
   <h4>
     <%= t("application.#{action_header}") %>
-    <%= "- #{@skin.name})" if action_header == 'editing' %>
+    <%= "- #{@skin.name} (#{@skin.exterior}) - #{number_to_currency(@skin.steam_price)}" if action_header == 'editing' %>
   </h4>
 </div>
 <div>

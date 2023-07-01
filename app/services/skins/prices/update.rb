@@ -25,7 +25,7 @@ module Skins
 
           new_steam_price = steam_price(skin_name: skin['market_hash_name'])
 
-          next if new_steam_price == persisted_skin.steam_price
+          next if new_steam_price.zero? || new_steam_price == persisted_skin.steam_price
 
           ActiveRecord::Base.transaction do
             persisted_skin.update(steam_price: new_steam_price)
