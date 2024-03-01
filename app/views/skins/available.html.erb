@@ -1,0 +1,36 @@
+<div class="row">
+  <% @skins.each do |skin| %>
+    <div class="col-6 col-sm-4 col-md-3 col-lg-2 mb-3">
+      <%= link_to(skin_path(skin)) do %>
+        <div class="card text-white" style="background: #<%= skin.name_color %>">
+          <div class="card-body d-flex flex-column align-items-center justify-content-center" style="height: 150px;">
+            <div class="d-flex justify-content-end" style="width: 100%;">
+              <%= image_tag(skin.image, class: "card-img", style: "max-width: 100px;") %>
+            </div>
+            <div class="card-img-overlay">
+              <h5 class="card-title" style="font-size: 10px"><%= skin.name %></h5>
+              <p class="card-text mb-0" style="font-size: 10px">
+                <%= skin.exterior %>
+              </p>
+              <% if skin.float&.positive? %>
+                <p class="card-text" style="font-size: 10px">
+                  <%= skin.float %>
+                </p>
+              <% end %>
+              <% if skin.has_sticker? %>
+                <div class="d-inline-flex">
+                  <% skin.sticker_image.each_with_index do |sticker, index| %>
+                    <div title="<%= skin.sticker_name.split(', ')[index] %>">
+                      <%= image_tag(sticker, width: 30) %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
+              <p class="card-text" style="font-size: 14px"><%= number_to_currency(skin.steam_price) %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

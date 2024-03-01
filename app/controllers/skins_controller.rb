@@ -57,6 +57,10 @@ class SkinsController < ApplicationController
     end
   end
 
+  def available
+    @skins = Skin.accessible_by(current_ability).available.order(created_at: :desc)
+  end
+
   private
 
   def skin_params
