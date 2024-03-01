@@ -43,6 +43,7 @@ Rails.application.routes.draw do
     collection do
       post 'search'
       post 'update_prices'
+      get 'available'
     end
 
     member do
