@@ -1,0 +1,46 @@
+.available-skins {
+  .card-body {
+    height: 200px;
+
+    .card-title {
+      font-size: 11px;
+    }
+
+    .card-text {
+      font-size: 10px;
+    }
+
+    .card-img {
+      max-width: 150px;
+    }
+
+    .sticker {
+      position: absolute;
+      bottom: 30px;
+      left: 10px;
+      text-align: left;
+      flex-wrap: wrap;
+      overflow: hidden;
+
+      .item {
+        margin-right: 5px;
+        max-width: 40px;
+        flex-shrink: 0;
+      }
+  
+      .image {
+        max-width: 100%;
+        height: auto;
+      }
+    }
+
+
+    .price {
+      position: absolute;
+      bottom: 5px;
+      left: 18px;
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+}

@@ -64,6 +64,8 @@ class Skin < ApplicationRecord
 
   has_many :logs
 
+  scope :available, -> { where(available: true) }
+
   def self.permitted_params
     [
       :id,
