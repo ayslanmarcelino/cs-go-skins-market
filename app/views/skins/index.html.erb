@@ -30,6 +30,12 @@
                  }
         %>
       <% end %>
+      <% if can?(:read, Skin) %>
+        <%= link_to(available_skins_path, class: 'btn btn-sm btn-dark') do %>
+          <i class="bi bi-toggle-on"></i>
+          <%= t('application.available') %>
+        <% end %>
+      <% end %>
     </div>
   </div>
   <div class="table-wrap">
