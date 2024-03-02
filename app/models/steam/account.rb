@@ -10,6 +10,7 @@
 #  nickname          :string
 #  profile_url       :string
 #  real_name         :string
+#  types_to_reject   :string           default([]), is an Array
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #  enterprise_id     :bigint
