@@ -16,7 +16,7 @@ module Skins
       @skins.each do |skin|
         asset_id = asset_id(skin: skin)
 
-        next if skin['marketable'].zero? || Skin::REJECT_TYPES.include?(skin['type'])
+        next if skin['marketable'].zero? || ignore_skin_type?(skin: skin)
         next if persisted_skin_available?(asset_id: asset_id)
 
         new_skin = Skin.new
@@ -101,6 +101,12 @@ module Skins
 
     def expiration_date(class_id:)
       Steam::Skins::Assets::ExpirationDate::Find.call(class_id: class_id)
+    end
+
+    def ignore_skin_type?(skin:)
+      type = skin['type']
+
+      (@steam_account.types_to_reject.include?(type) && Skin::REJECT_TYPES.include?(type))
     end
   end
 end
