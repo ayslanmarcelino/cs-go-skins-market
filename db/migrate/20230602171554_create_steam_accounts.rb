@@ -9,6 +9,9 @@ class CreateSteamAccounts < ActiveRecord::Migration[7.0]
       t.string :avatar_medium_url
       t.string :avatar_full_url
       t.string :real_name
+
+      t.string :types_to_reject, array: true, default: []
+
       t.boolean :active, default: true
 
       t.references :owner, foreign_key: { to_table: :users }
