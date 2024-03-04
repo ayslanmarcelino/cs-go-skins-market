@@ -21,32 +21,21 @@ module Inventories
       private
 
       def create_skins!
-        Steam::Skins::Create.call(steam_account: @steam_account, skins: skins, inventory: inventory)
-      end
-
-      def inventory
-        @inventory ||= skin_consult.raw_data['assets']
-      end
-
-      def skins
-        @skins ||= skin_consult.raw_data['descriptions'].reverse
+        constantized_provider::Skins::Create.call(steam_account: @steam_account, consult: consult)
       end
 
       def update_consult!
-        return unless skin_consult
+        return unless consult
 
-        skin_consult.update(
-          raw_data: parsed_json,
-          updated_at: Time.current
-        )
+        consult.update(raw_data: parsed_json)
 
         update_last_search!
       end
 
       def create_consult!
-        return if skin_consult
+        return if consult
 
-        @skin_consult ||= Skin::Consult.create(
+        @consult ||= Skin::Consult.create(
           raw_data: parsed_json,
           steam_id_decimal: @steam_account.steam_id,
           source: :inventory
@@ -63,8 +52,8 @@ module Inventories
         @interval_in_minute ||= @current_user.interval_in_minute&.minutes&.ago
       end
 
-      def skin_consult
-        @skin_consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :inventory)
+      def consult
+        @consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :inventory)
       end
 
       def parsed_json
@@ -72,7 +61,11 @@ module Inventories
       end
 
       def request
-        @request ||= Steam::Inventories::Consult.call(steam_id: @steam_account.steam_id)
+        @request ||= constantized_provider::Inventories::Consult.call(steam_id: @steam_account.steam_id)
+      end
+
+      def constantized_provider
+        @steam_account.provider_cd.camelize.constantize
       end
 
       def permitted_update?
