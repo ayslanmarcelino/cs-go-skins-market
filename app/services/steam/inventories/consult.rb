@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Steam
-  module Inventory
+  module Inventories
     class Consult < ApplicationService
       def initialize(steam_id:)
         @steam_id = steam_id
