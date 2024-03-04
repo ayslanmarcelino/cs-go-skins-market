@@ -28,7 +28,7 @@ class SkinsController < ApplicationController
   end
 
   def search
-    Steam::Skins::CreateJob.perform_later(current_user: current_user, steam_account: steam_account)
+    Inventories::Skins::CreateJob.perform_later(current_user: current_user, steam_account: steam_account)
 
     flash[:success] = 'A busca das skins desta conta será realizada em breve. Quando finalizado, iremos notificá-lo.'
     redirect_to(skins_path)

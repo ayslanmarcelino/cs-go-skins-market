@@ -1,4 +1,4 @@
-module Steam
+module Inventories
   module Skins
     class Create < ApplicationService
       DEFAULT_BETWEEN_TIME = 120
@@ -64,7 +64,7 @@ module Steam
       end
 
       def skin_consult
-        @skin_consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :steam_inventory)
+        @skin_consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :inventory)
       end
 
       def parsed_json
