@@ -7,6 +7,12 @@ Rails.application.routes.draw do
   get 'dashboard/index'
   get 'report', to: 'dashboard#pdf'
 
+  require 'sidekiq/web'
+
+  authenticate :user, ->(user) { user.roles.any? { |role| role.kind == :admin_master } } do
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   resources :profiles, only: :select
 
   resources :enterprises, only: [:index, :show, :new, :create, :edit, :update, :select] do
