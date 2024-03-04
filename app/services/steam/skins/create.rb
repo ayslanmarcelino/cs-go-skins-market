@@ -72,7 +72,7 @@ module Steam
       end
 
       def request
-        @request ||= Steam::Request.call(steam_id: @steam_account.steam_id)
+        @request ||= Steam::Inventory::Consult.call(steam_id: @steam_account.steam_id)
       end
 
       def permitted_update?
