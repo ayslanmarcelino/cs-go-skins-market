@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   require 'sidekiq/web'
 
-  authenticate :user do
+  authenticate :user, ->(user) { user.roles.any? { |role| role.kind == :admin_master } } do
     mount Sidekiq::Web => '/sidekiq'
   end
 
