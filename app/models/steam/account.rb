@@ -30,11 +30,15 @@
 #  fk_rails_...  (owner_id => users.id)
 #
 class Steam::Account < ApplicationRecord
+  PROVIDERS = [:steam, :steam_web_api].freeze
+
   belongs_to :owner, class_name: 'User'
   belongs_to :enterprise
 
   validates :steam_custom_id, presence: true
   validates :steam_custom_id, uniqueness: { scope: [:owner_id, :enterprise_id] }
+
+  as_enum :provider, PROVIDERS, prefix: true, map: :string
 
   before_validation :downcase_steam_custom_id
 
