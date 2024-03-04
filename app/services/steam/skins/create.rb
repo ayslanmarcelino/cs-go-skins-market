@@ -21,7 +21,7 @@ module Steam
       end
 
       def create!
-        @skins.each do |skin|
+        skins.each do |skin|
           asset_id = asset_id(skin: skin)
 
           next if skin['marketable'].zero? || ignore_skin_type?(skin: skin)
