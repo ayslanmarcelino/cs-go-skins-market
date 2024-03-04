@@ -21,7 +21,7 @@ module Inventories
       private
 
       def create_skins!
-        ::Skins::Create.call(steam_account: @steam_account, skins: skins, inventory: inventory)
+        Steam::Skins::Create.call(steam_account: @steam_account, skins: skins, inventory: inventory)
       end
 
       def inventory
@@ -49,7 +49,7 @@ module Inventories
         @skin_consult ||= Skin::Consult.create(
           raw_data: parsed_json,
           steam_id_decimal: @steam_account.steam_id,
-          source: :steam_inventory
+          source: :inventory
         )
 
         update_last_search!
