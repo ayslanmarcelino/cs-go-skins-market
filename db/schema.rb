@@ -151,6 +151,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_14_170458) do
     t.string "avatar_medium_url"
     t.string "avatar_full_url"
     t.string "real_name"
+    t.string "provider_cd", default: "steam"
     t.string "types_to_reject", default: [], array: true
     t.boolean "active", default: true
     t.bigint "owner_id"

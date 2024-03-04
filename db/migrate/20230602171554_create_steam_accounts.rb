@@ -9,6 +9,7 @@ class CreateSteamAccounts < ActiveRecord::Migration[7.0]
       t.string :avatar_medium_url
       t.string :avatar_full_url
       t.string :real_name
+      t.string :provider_cd, default: 'steam'
 
       t.string :types_to_reject, array: true, default: []
 
