@@ -19,7 +19,7 @@ module SteamWebApi
       def fill_basic_data(skin:, new_skin:)
         new_skin.name = skin.dig('marketname')
         new_skin.market_name = skin.dig('markethashname')
-        new_skin.name_color = skin.dig('color')
+        new_skin.name_color = skin.dig('bordercolor')
         new_skin.kind = skin.dig('tags')&.first&.dig('localized_tag_name')
         new_skin.gun_kind = skin.dig('tags')&.second&.dig('localized_tag_name')
         new_skin.steam_account = @steam_account
