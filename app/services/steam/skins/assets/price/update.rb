@@ -27,7 +27,7 @@ module Steam
           end
 
           def consult
-            @consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :steam_inventory)
+            @consult ||= Skin::Consult.find_by(steam_id_decimal: @steam_account.steam_id, source_cd: :inventory)
           end
         end
       end

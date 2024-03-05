@@ -12,7 +12,7 @@
 #
 class Skin::Consult < ApplicationRecord
   SOURCES = [
-    :steam_inventory,
+    :inventory,
     :skin_price
   ].freeze
 
