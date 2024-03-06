@@ -96,21 +96,15 @@ module SteamWebApi
       end
 
       def sticker_name(skin:)
-        # TODO: verificar
-
-        # Steam::Skins::Assets::Stickers::Names::Find.call(skin: skin)
+        Steam::Skins::Assets::Stickers::Names::Find.call(skin: skin)
       end
 
       def sticker_image(skin:)
-        # TODO: verificar
-
-        # Steam::Skins::Assets::Stickers::Images::Find.call(skin: skin)
+        Steam::Skins::Assets::Stickers::Images::Find.call(skin: skin)
       end
 
       def expiration_date(class_id:)
-        # TODO: verificar
-
-        # Steam::Skins::Assets::ExpirationDate::Find.call(class_id: class_id)
+        Steam::Skins::Assets::ExpirationDate::Find.call(class_id: class_id)
       end
 
       def ignore_skin_type?(skin:)
