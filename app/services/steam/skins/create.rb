@@ -39,7 +39,7 @@ module Steam
       end
 
       def create_log!(new_skin:)
-        Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
+        ::Skins::Logs::Create.call(steam_price: new_skin.steam_price, skin: new_skin)
       end
 
       def fill_data(asset_id:, skin:, new_skin:)
@@ -68,11 +68,11 @@ module Steam
       end
 
       def asset_id(skin:)
-        Steam::Skins::Assets::Find.call(inventory: @inventory, skin: skin)
+        Steam::Skins::Assets::Find.call(inventory: inventory, skin: skin)
       end
 
       def persisted_skin_available?(asset_id:)
-        Skins::Find.call(steam_account: @steam_account, steam_id: asset_id, available: true)
+        ::Skins::Find.call(steam_account: @steam_account, steam_id: asset_id, available: true)
       end
 
       def image(skin:)
