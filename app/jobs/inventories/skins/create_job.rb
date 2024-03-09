@@ -9,5 +9,7 @@ class Inventories::Skins::CreateJob < ApplicationJob
     # TODO: Criar uma listagem de chamadas com status
   rescue StandardError => e
     # TODO: Criar um alerta para o usuário informando que deu erro
+
+    Rails.logger.debug("#{steam_account.provider_cd.capitalize}: #{e}")
   end
 end
